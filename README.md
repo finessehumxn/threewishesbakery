@@ -19,4 +19,3 @@ Save your real photos here with these exact filenames (JPG). The site works with
 | real-sourdough-crumb.jpg | Rotating Seasonal Sourdough |
 | sisters.jpg | Jeanie & Patti photo in the story section |
 
-Tip: if your Lovable site is still live, you can right-click-save the originals from it before disconnecting — they load from URLs like `yoursite.lovable.app/__l5e/assets-v1/…`. Once Lovable is disconnected those URLs go away, so grab them now.
