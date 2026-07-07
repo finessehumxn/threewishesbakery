@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Recipes — Three Wishes Bakery</title>
-<meta name="description" content="Baking notes, techniques, and honest kitchen advice from Jeanie & Patti of Three Wishes Bakery.">
-<link rel="icon" href="../favicon.ico">
+<title>Three Wishes Bakery — Homemade comfort, baked with heart</title>
+<meta name="description" content="Twin nurse-owned small-batch bakery in California. Gourmet cookies, dessert bars, and sourdough — baked to order and shipped nationwide. Free shipping on orders $100+.">
+<link rel="icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -17,61 +17,414 @@
 
 <header class="site-header">
   <nav class="nav container" aria-label="Main">
-    <a class="brand" href="../index.html">
-      <span class="brand-mark">✦</span>
-      <span class="brand-name">Three Wishes<small>From the kitchen</small></span>
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><img src="images/logo-pink.jpg" alt="" data-optional onerror="this.style.display='none'">✦</span>
+      <span class="brand-name">Three Wishes<small>Bakery · CA</small></span>
     </a>
     <ul class="nav-links">
-      <li><a href="../index.html#menu">Menu</a></li>
-      <li><a href="../index.html#minis">Mini Packs</a></li>
-      <li><a href="../index.html#sisters">Sisters</a></li>
-      <li><a href="../catering/">Catering</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#minis">Mini Packs</a></li>
+      <li><a href="#sisters">Sisters</a></li>
+      <li><a href="recipes/">Recipes</a></li>
     </ul>
     <button class="cart-btn" onclick="openCart()">🛒 Cart <span data-cart-count>0</span></button>
   </nav>
 </header>
 
-<section class="page-hero container">
-  <a href="../index.html" style="font-weight:700;text-decoration:none">← Back</a>
-  <div style="margin-top:20px">
-    <span class="eyebrow">From the kitchen</span>
-    <h1>Recipes &amp; <span class="serif-accent">notes.</span></h1>
-    <p>Baking notes, techniques, and honest kitchen advice from Jeanie &amp; Patti. Read, try, comment.</p>
+<!-- HERO -->
+<section class="hero container">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">✦ Freshly Baked Magic ✦</span>
+      <h1>Sweet <span class="serif-accent">Wishes</span> Only.</h1>
+      <p class="lede">Gourmet cookies crafted with a nurse's care — and a twin sister's shared dream.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#menu">Shop Cookies</a>
+        <a class="btn btn-ghost" href="#sisters">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="images/cookie-hero.jpg" alt="Warm chocolate chip cookies fresh from the oven" data-optional>
+      <span class="sticker tr">Nurse Owned</span>
+      <span class="sticker bl">Twin Sister Recipe</span>
+    </div>
   </div>
 </section>
 
-<section class="section container" style="padding-top:20px">
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>brown butter</span><span>flaky sea salt</span><span>twin baked</span><span>nurse owned</span><span>small batch</span><span>36-count mini boxes</span><span>ships nationwide</span><span>made in california</span>
+    <span>brown butter</span><span>flaky sea salt</span><span>twin baked</span><span>nurse owned</span><span>small batch</span><span>36-count mini boxes</span><span>ships nationwide</span><span>made in california</span>
+  </div>
+</div>
+
+<!-- BADGES -->
+<section class="badges container">
+  <h2>Proudly <span class="serif-accent">small-batch.</span> Big heart. Every wish welcome.</h2>
+  <div class="badge-row">
+    <span class="badge">✦ Woman Owned</span>
+    <span class="badge">✦ Black Owned</span>
+    <span class="badge">✦ Millennial Owned</span>
+    <span class="badge">✦ Twin Owned</span>
+    <span class="badge">✦ California Natives</span>
+    <span class="badge">✦ Nurse Founded</span>
+  </div>
+</section>
+
+<!-- MENU: COOKIES -->
+<section class="section container" id="menu">
+  <div class="section-head">
+    <span class="eyebrow">This week's menu</span>
+    <h2>What's in the <span class="serif-accent">oven.</span></h2>
+    <p>Rotating seasonal menu, always made from scratch. Order full-size or as minis — whichever craving is calling.</p>
+  </div>
+  <div class="grid">
+
+    <article class="card" data-product="classic">
+      <div class="card-photo">
+        <img src="images/real-classic.jpg" alt="The Classic Wish chocolate chip cookies" data-optional>
+        <span class="tag">Fan Favorite</span><span class="price-chip">from $18</span>
+      </div>
+      <div class="card-body">
+        <h3>The Classic Wish</h3>
+        <p>Buttery golden dough, semi-sweet chips, crisp edges, soft center.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">6</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">12</button>
+          <button type="button" class="size-btn" data-size-index="2" aria-pressed="false" onclick="selectSize(this)">24 jumbo</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="cocoa">
+      <div class="card-photo">
+        <img src="images/real-cocoa-white.jpg" alt="Cozy Cocoa Wish dark chocolate cookies with white chocolate" data-optional>
+        <span class="tag">Chocolate</span><span class="price-chip">from $18</span>
+      </div>
+      <div class="card-body">
+        <h3>Cozy Cocoa Wish</h3>
+        <p>Dark cocoa dough with pockets of white chocolate. Fudgy and warm.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">6</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">12</button>
+          <button type="button" class="size-btn" data-size-index="2" aria-pressed="false" onclick="selectSize(this)">24 jumbo</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="whitechip">
+      <div class="card-photo">
+        <img src="images/real-white-chip.jpg" alt="White Chip Wish brown butter cookies" data-optional>
+        <span class="tag">Nurse Jeanie pick</span><span class="price-chip">from $18</span>
+      </div>
+      <div class="card-body">
+        <h3>White Chip Wish</h3>
+        <p>Golden brown-butter dough loaded with creamy white chocolate chips.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">6</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">12</button>
+          <button type="button" class="size-btn" data-size-index="2" aria-pressed="false" onclick="selectSize(this)">24 jumbo</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="pbsandwich">
+      <div class="card-photo">
+        <img src="images/pb-sandwich.jpg" alt="PB Wish sandwich cookies with peanut butter filling" data-optional>
+        <span class="tag">Peanut Butter</span><span class="price-chip">from $18</span>
+      </div>
+      <div class="card-body">
+        <h3>PB Wish Sandwiches</h3>
+        <p>Two soft PB cookies hugging a creamy peanut butter filling.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">6</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">12</button>
+          <button type="button" class="size-btn" data-size-index="2" aria-pressed="false" onclick="selectSize(this)">24 jumbo</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="variety">
+      <div class="card-photo">
+        <img src="images/real-lineup.jpg" alt="Baker's Variety Wish mixed cookie lineup" data-optional>
+        <span class="tag">Best of Both</span><span class="price-chip">from $18</span>
+      </div>
+      <div class="card-body">
+        <h3>Baker's Variety Wish</h3>
+        <p>Mixed dozen — classic chip, cocoa white-chip, and white chip.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">6</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">12</button>
+          <button type="button" class="size-btn" data-size-index="2" aria-pressed="false" onclick="selectSize(this)">24 jumbo</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- TREATS & BARS -->
+<section class="section container">
+  <div class="section-head">
+    <span class="eyebrow">✨ Treats &amp; dessert bars</span>
+    <h2>A little <span class="serif-accent">bliss,</span> by the bite.</h2>
+    <p>Small-batch bars and bites — bright, buttery, and made for sharing (or not, we won't tell).</p>
+  </div>
+  <div class="grid">
+
+    <article class="card" data-product="brownies">
+      <div class="card-photo">
+        <img src="images/brownie.jpg" alt="Gooey Wish Brownies with crackle tops" data-optional>
+        <span class="tag">Fudgy</span><span class="price-chip">from $18</span>
+      </div>
+      <div class="card-body">
+        <h3>Gooey Wish Brownies</h3>
+        <p>Crackle-topped brownies with a molten dark chocolate center.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">6</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">12</button>
+          <button type="button" class="size-btn" data-size-index="2" aria-pressed="false" onclick="selectSize(this)">36 party box</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="lemonloaf">
+      <div class="card-photo">
+        <img src="images/real-lemon-loaf.jpg" alt="Golden Lemon Bliss Loaf with vanilla glaze" data-optional>
+        <span class="tag">Loaf</span><span class="price-chip">from $14</span>
+      </div>
+      <div class="card-body">
+        <h3>Golden Lemon Bliss Loaf</h3>
+        <p>Bright, buttery lemon loaf with vanilla glaze.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">Half loaf</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">Full loaf</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="tangybars">
+      <div class="card-photo">
+        <img src="images/lemon-bar.jpg" alt="Tangy Wish Bars with homemade crust" data-optional>
+        <span class="tag">Bars</span><span class="price-chip">from $18</span>
+      </div>
+      <div class="card-body">
+        <h3>Tangy Wish Bars</h3>
+        <p>Tangy dessert bar with a homemade crust.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">6</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">12</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- SOURDOUGH -->
+<section class="section container">
+  <div class="section-head">
+    <span class="eyebrow">🍞 Sourdough — Patti's specialty</span>
+    <h2>Loaves worth the <span class="serif-accent">wait.</span></h2>
+    <p>Long-fermented, hand-shaped, baked the old-fashioned way — the sister-loaf to every cookie order.</p>
+  </div>
+  <div class="grid">
+
+    <article class="card" data-product="sourclassic">
+      <div class="card-photo">
+        <img src="images/real-sourdough-boule.jpg" alt="Classic sourdough boule with crackling crust" data-optional>
+        <span class="tag">Handcrafted</span><span class="price-chip">from $9</span>
+      </div>
+      <div class="card-body">
+        <h3>Classic Sourdough Loaf</h3>
+        <p>Long-fermented, hand-shaped, dutch-oven baked for a crackling crust.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">Half loaf</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">Full loaf</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="sourbacon">
+      <div class="card-photo">
+        <img src="images/real-sourdough-bacon.jpg" alt="Bacon and cheddar sourdough loaf" data-optional>
+        <span class="tag">Signature</span><span class="price-chip">from $12</span>
+      </div>
+      <div class="card-body">
+        <h3>Bacon &amp; Cheddar Sourdough</h3>
+        <p>Smoky bacon + sharp cheddar in an open crumb.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">Half loaf</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">Full loaf</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+    <article class="card" data-product="sourseasonal">
+      <div class="card-photo">
+        <img src="images/real-sourdough-crumb.jpg" alt="Seasonal sourdough with open crumb" data-optional>
+        <span class="tag">Limited</span><span class="price-chip">from $10</span>
+      </div>
+      <div class="card-body">
+        <h3>Rotating Seasonal Sourdough</h3>
+        <p>Patti's rotating small-batch loaves — jalapeño-cheddar, rosemary-garlic, cranberry-walnut.</p>
+        <div class="size-row" role="group" aria-label="Choose size">
+          <button type="button" class="size-btn" data-size-index="0" aria-pressed="true" onclick="selectSize(this)">Half loaf</button>
+          <button type="button" class="size-btn" data-size-index="1" aria-pressed="false" onclick="selectSize(this)">Full loaf</button>
+        </div>
+        <button type="button" class="add-btn" onclick="addFromCard(this.closest('.card'))">+ Add to box</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- MINIS -->
+<section class="section container" id="minis">
+  <div class="minis">
+    <div>
+      <span class="eyebrow" style="color:var(--rose)">Great prices, big flavor</span>
+      <h2>36 minis, <span class="serif-accent">infinite wishes.</span></h2>
+      <p style="margin-top:12px">Bite-sized versions of every signature flavor, packed 36 to a box. Perfect for showers, work spreads, and any celebration that calls for a little something sweet.</p>
+      <ul>
+        <li>36-count mini box</li>
+        <li>Cookie dough · by the dozen+</li>
+        <li>Sourdough · loaf or half</li>
+      </ul>
+    </div>
+    <div style="text-align:center">
+      <button class="btn btn-primary" style="border-color:var(--rose)" onclick="addToCart('minibox',0)">Order a mini box →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SISTERS -->
+<section class="section container" id="sisters">
+  <div class="sisters">
+    <div class="sisters-photo">
+      <img src="images/sisters.jpg" alt="Jeanie and Patti, twin sisters and founders of Three Wishes Bakery" data-optional>
+    </div>
+    <div>
+      <span class="eyebrow">EST · California — Jeanie ✦ Patti</span>
+      <h2>Twice the <span class="serif-accent">Magic.</span></h2>
+      <p>We're Jeanie and Patti — twin BSN nurses and the sisters behind Three Wishes Bakery. By day we care for patients. By night (and early morning), we bake.</p>
+      <p><strong>Jeanie</strong> handles the cookies and dessert bars — the kind that make you close your eyes on the first bite. <strong>Patti</strong> handles the sourdough — long-fermented, hand-shaped, made the way bread used to be.</p>
+      <p>No trendy. No oversized. Just homemade — the kind of food that makes someone feel taken care of.</p>
+      <div class="badge-row" style="justify-content:flex-start;margin:18px 0 24px">
+        <span class="badge">Twin BSN Nurses</span>
+        <span class="badge">Nurse-Owned</span>
+        <span class="badge">Made From Scratch</span>
+        <span class="badge">California Local</span>
+      </div>
+      <a class="btn btn-primary" href="#menu">Order from the sisters →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COOKIE CARE -->
+<section class="section container">
+  <div class="section-head">
+    <span class="eyebrow">Nurse Jeanie's cookie care</span>
+    <h2>Made with care. <span class="serif-accent">Kept with care.</span></h2>
+    <p>A little nurse's advice for keeping every batch as fresh as the moment it left the oven.</p>
+  </div>
+  <div class="care-grid">
+    <div class="care-card">
+      <span class="eyebrow">Cookie care</span>
+      <h3>Warm like it's fresh.</h3>
+      <p>Airtight container up to 5 days at room temp, or freeze up to 3 months. Bring back that just-baked hug: 350°F oven for 5–7 min, or microwave 10–15 sec (+20 sec if frozen).</p>
+    </div>
+    <div class="care-card">
+      <span class="eyebrow">Take-&amp;-bake dough</span>
+      <h3>Keep cold. Bake hot.</h3>
+      <p>Cookie Dough Sleeves live in the freezer. Preheat to 350°F, arrange pucks on a lined sheet, and bake straight from frozen for warm-from-Jeanie's-kitchen magic.</p>
+    </div>
+    <div class="care-card">
+      <span class="eyebrow">Shipping &amp; allergens</span>
+      <h3>Shipped with care.</h3>
+      <p>Orders ship Mondays &amp; Wednesdays in temperature-controlled packaging, 1–2 business day delivery. Contains wheat, milk, eggs, and soy. May contain traces of nuts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RECIPES TEASER -->
+<section class="section container">
+  <div class="section-head" style="display:flex;justify-content:space-between;align-items:baseline;max-width:none;flex-wrap:wrap;gap:10px">
+    <div>
+      <span class="eyebrow">From the kitchen</span>
+      <h2>Just <span class="serif-accent">recipes.</span></h2>
+    </div>
+    <a href="recipes/" style="font-weight:700">all recipes →</a>
+  </div>
   <div class="recipe-list">
-    <div class="recipe-item">
+    <a class="recipe-item" href="recipes/">
       <span class="num">01 · Technique</span>
       <span><h3>The 24-hour rest</h3><p>Why chilling your dough overnight makes it taste like a bakery, not a batch.</p></span>
       <span class="meta">Nurse Jeanie · 4 min read</span>
-    </div>
-    <div class="recipe-item">
+    </a>
+    <a class="recipe-item" href="recipes/">
       <span class="num">02 · From my kitchen</span>
       <span><h3>Brown butter, always</h3><p>The 8-minute step that turned my cookies into the ones people ask about.</p></span>
       <span class="meta">Nurse Jeanie · 3 min read</span>
-    </div>
-    <div class="recipe-item">
+    </a>
+    <a class="recipe-item" href="recipes/">
       <span class="num">03 · Pantry note</span>
       <span><h3>Salt is not optional</h3><p>How a pinch of Maldon on top makes the chocolate taste like more chocolate.</p></span>
       <span class="meta">Nurse Jeanie · 2 min read</span>
-    </div>
-    <div class="recipe-item">
-      <span class="num">04 · Patti's kitchen</span>
-      <span><h3>Feeding your starter (like a person you love)</h3><p>Patti's honest, forgiving routine for a sourdough starter that actually shows up.</p></span>
-      <span class="meta">Nurse Patti · 5 min read</span>
-    </div>
-    <div class="recipe-item">
-      <span class="num">05 · Nurse's tip</span>
-      <span><h3>Keeping cookies fresh (for real)</h3><p>Airtight, cool, and one weird trick with a slice of bread.</p></span>
-      <span class="meta">Nurse Jeanie · 2 min read</span>
-    </div>
+    </a>
   </div>
 </section>
 
+<!-- CTA -->
+<section class="section container">
+  <div class="cta">
+    <h2>Ready when <span class="serif-accent" style="color:var(--cream)">you are.</span></h2>
+    <p>Baked-to-order and shipped nationwide. Cookies by the 6, 12, or dozen+. Cookie dough by the dozen+. Sourdough by the loaf or half. <strong>Free shipping on orders $100+.</strong> Small orders welcome — shipping runs higher, so we recommend stocking up.</p>
+    <a class="btn btn-ghost" href="#menu">Place an order →</a>
+    &nbsp;
+    <a class="btn btn-ghost" href="catering/">Catering inquiries</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="site-footer">
-  <div class="container footer-note" style="margin-top:0;border-top:none">
+  <div class="container footer-grid">
+    <div>
+      <h4>Three Wishes Bakery</h4>
+      <p style="font-size:.9rem;max-width:38ch">Homemade in California. A twin nurse-owned small-batch bakery. Woman, Black, and millennial owned, born-and-raised in California. Made from scratch, shipped nationwide, baked with heart — because everyone deserves a wish granted.</p>
+      <p style="font-family:var(--font-mono);font-size:.68rem;margin-top:14px;color:var(--rose)">Free shipping · $100+ · Ships anywhere in the USA</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#menu">The Menu</a></li>
+        <li><a href="#minis">Mini Packs</a></li>
+        <li><a href="#sisters">Sisters' Story</a></li>
+        <li><a href="recipes/">Recipes</a></li>
+        <li><a href="catering/">Catering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Say hi</h4>
+      <ul>
+        <li><a href="mailto:hello@3wishesbakery.com">hello@3wishesbakery.com</a></li>
+        <li><a href="https://instagram.com" rel="noopener">Instagram</a></li>
+        <li><a href="https://tiktok.com" rel="noopener">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-note">
     <span>© 2026 Three Wishes Bakery ✦ Jeanie &amp; Patti</span>
     <span>Baked with heart in California</span>
     <span>Site crafted by <a href="https://millennialscreatives.com" target="_blank" rel="noopener" style="color:var(--rose);font-weight:700">Millennials Creatives LLC</a> ✦</span>
@@ -95,6 +448,6 @@
   </div>
 </aside>
 
-<script src="../js/app.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
