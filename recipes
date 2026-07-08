@@ -1,1 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recipes — Three Wishes Bakery</title>
+<meta name="description" content="Baking notes, techniques, and honest kitchen advice from Jeanie & Patti of Three Wishes Bakery.">
+<link rel="icon" href="../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
 
+<div class="announce">Free nationwide shipping on orders <strong>$100+</strong> · Baked-to-order · Ships anywhere in the USA</div>
+
+<header class="site-header">
+  <nav class="nav container" aria-label="Main">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">✦</span>
+      <span class="brand-name">Three Wishes<small>From the kitchen</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#menu">Menu</a></li>
+      <li><a href="../index.html#minis">Mini Packs</a></li>
+      <li><a href="../index.html#sisters">Sisters</a></li>
+      <li><a href="../catering/">Catering</a></li>
+    </ul>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart <span data-cart-count>0</span></button>
+  </nav>
+</header>
+
+<section class="page-hero container">
+  <a href="../index.html" style="font-weight:700;text-decoration:none">← Back</a>
+  <div style="margin-top:20px">
+    <span class="eyebrow">From the kitchen</span>
+    <h1>Recipes &amp; <span class="serif-accent">notes.</span></h1>
+    <p>Baking notes, techniques, and honest kitchen advice from Jeanie &amp; Patti. Read, try, comment.</p>
+  </div>
+</section>
+
+<section class="section container" style="padding-top:20px">
+  <div class="recipe-list">
+    <div class="recipe-item">
+      <span class="num">01 · Technique</span>
+      <span><h3>The 24-hour rest</h3><p>Why chilling your dough overnight makes it taste like a bakery, not a batch.</p></span>
+      <span class="meta">Nurse Jeanie · 4 min read</span>
+    </div>
+    <div class="recipe-item">
+      <span class="num">02 · From my kitchen</span>
+      <span><h3>Brown butter, always</h3><p>The 8-minute step that turned my cookies into the ones people ask about.</p></span>
+      <span class="meta">Nurse Jeanie · 3 min read</span>
+    </div>
+    <div class="recipe-item">
+      <span class="num">03 · Pantry note</span>
+      <span><h3>Salt is not optional</h3><p>How a pinch of Maldon on top makes the chocolate taste like more chocolate.</p></span>
+      <span class="meta">Nurse Jeanie · 2 min read</span>
+    </div>
+    <div class="recipe-item">
+      <span class="num">04 · Patti's kitchen</span>
+      <span><h3>Feeding your starter (like a person you love)</h3><p>Patti's honest, forgiving routine for a sourdough starter that actually shows up.</p></span>
+      <span class="meta">Nurse Patti · 5 min read</span>
+    </div>
+    <div class="recipe-item">
+      <span class="num">05 · Nurse's tip</span>
+      <span><h3>Keeping cookies fresh (for real)</h3><p>Airtight, cool, and one weird trick with a slice of bread.</p></span>
+      <span class="meta">Nurse Jeanie · 2 min read</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-note" style="margin-top:0;border-top:none">
+    <span>© 2026 Three Wishes Bakery ✦ Jeanie &amp; Patti</span>
+    <span>Baked with heart in California</span>
+    <span>Site crafted by <a href="https://millennialscreatives.com" target="_blank" rel="noopener" style="color:var(--rose);font-weight:700">Millennials Creatives LLC</a> ✦</span>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="drawer-backdrop" onclick="closeCart()"></div>
+<aside class="drawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h3>Your box · Cart (<span data-cart-count>0</span>)</h3>
+    <button class="drawer-close" onclick="closeCart()" aria-label="Close cart">✕</button>
+  </div>
+  <div class="drawer-items" id="cartItems"></div>
+  <div class="drawer-foot">
+    <div class="totals"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+    <div class="totals"><span>Shipping</span><span id="cartShipping">—</span></div>
+    <div class="totals total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    <p class="note">Free shipping on orders $100+ ✦ ships Mon &amp; Wed</p>
+  </div>
+</aside>
+
+<script src="../js/app.js"></script>
+</body>
+</html>
