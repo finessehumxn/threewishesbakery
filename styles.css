@@ -287,3 +287,71 @@ textarea{min-height:130px;resize:vertical}
   opacity:0;pointer-events:none;transition:.25s;z-index:120;
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ============================================================
+   Craveability layer — subtle motion that makes you hungry
+   (auto-disabled by the prefers-reduced-motion rule up top)
+   ============================================================ */
+
+/* hero photo: slow, warm float like it's fresh off the rack */
+.hero-float{animation:heroFloat 6s ease-in-out infinite}
+@keyframes heroFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-10px) rotate(-.6deg)}
+}
+
+/* drifting cookies + sparkles in the hero */
+.crumbs{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.crumbs span{
+  position:absolute;font-size:1.5rem;opacity:.5;
+  animation:drift 14s linear infinite;
+}
+.crumbs span:nth-child(1){left:6%;animation-delay:0s;font-size:1.9rem}
+.crumbs span:nth-child(2){left:24%;animation-delay:4s;color:var(--rose-deep)}
+.crumbs span:nth-child(3){left:55%;animation-delay:8s;font-size:1.3rem}
+.crumbs span:nth-child(4){left:76%;animation-delay:2s;color:var(--rose-deep)}
+.crumbs span:nth-child(5){left:90%;animation-delay:10s;font-size:1.7rem}
+@keyframes drift{
+  0%{transform:translateY(105vh) rotate(0deg)}
+  100%{transform:translateY(-10vh) rotate(340deg)}
+}
+
+/* fresh-from-the-oven pulse on primary CTAs and add buttons */
+.btn-primary,.add-btn{position:relative}
+.btn-primary::after,.add-btn::after{
+  content:"";position:absolute;inset:-3px;border-radius:inherit;
+  border:2px solid var(--rose);opacity:0;
+  animation:ovenPulse 2.6s ease-out infinite;
+}
+@keyframes ovenPulse{
+  0%{opacity:.55;transform:scale(1)}
+  70%,100%{opacity:0;transform:scale(1.12)}
+}
+
+/* product photos: slow appetite zoom, faster on hover (hover rule exists) */
+.card-photo img{animation:slowCrave 12s ease-in-out infinite}
+@keyframes slowCrave{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.045)}
+}
+.card:hover .card-photo img{animation:none;transform:scale(1.08)}
+
+/* sourdough drop + limited tags get a soft shimmer */
+.tag{overflow:hidden}
+.tag::before{
+  content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:shine 4.5s ease-in-out infinite;
+}
+@keyframes shine{0%{left:-70%}45%,100%{left:130%}}
+
+/* ---------- weekly drop bar ---------- */
+.drop-bar{
+  display:block;text-align:center;text-decoration:none;
+  background:var(--rose);color:var(--white);font-weight:700;
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;
+  padding:10px 16px;border-bottom:3px solid var(--rose-deep);
+  animation:dropGlow 3s ease-in-out infinite;
+}
+.drop-bar:hover{background:var(--rose-deep)}
+@keyframes dropGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
