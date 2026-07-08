@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Recipes — Three Wishes Bakery</title>
-<meta name="description" content="Baking notes, techniques, and honest kitchen advice from Jeanie & Patti of Three Wishes Bakery.">
+<title>Catering Inquiries — Three Wishes Bakery</title>
+<meta name="description" content="Corporate and event cookie catering from nurse-owned Three Wishes Bakery, California. Trusted by hospital teams and organizations like Planned Parenthood. Weddings, showers, offices, pop-ups.">
 <link rel="icon" href="../favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,13 +19,13 @@
   <nav class="nav container" aria-label="Main">
     <a class="brand" href="../index.html">
       <span class="brand-mark">✦</span>
-      <span class="brand-name">Three Wishes<small>From the kitchen</small></span>
+      <span class="brand-name">Three Wishes<small>Catering</small></span>
     </a>
     <ul class="nav-links">
       <li><a href="../index.html#menu">Menu</a></li>
       <li><a href="../index.html#minis">Mini Packs</a></li>
       <li><a href="../index.html#sisters">Sisters</a></li>
-      <li><a href="../catering/">Catering</a></li>
+      <li><a href="../recipes/">Recipes</a></li>
     </ul>
     <button class="cart-btn" onclick="openCart()">🛒 Cart <span data-cart-count>0</span></button>
   </nav>
@@ -34,40 +34,65 @@
 <section class="page-hero container">
   <a href="../index.html" style="font-weight:700;text-decoration:none">← Back</a>
   <div style="margin-top:20px">
-    <span class="eyebrow">From the kitchen</span>
-    <h1>Recipes &amp; <span class="serif-accent">notes.</span></h1>
-    <p>Baking notes, techniques, and honest kitchen advice from Jeanie &amp; Patti. Read, try, comment.</p>
+    <span class="eyebrow">Catering</span>
+    <h1>Let's cater your <span class="serif-accent">celebration.</span></h1>
+    <p>Weddings · showers · birthdays · corporate events · pop-ups. Cookie trays, sourdough boards, dessert bar spreads — built to your headcount and dietary needs. We've been the batch-bakers for our own workplaces for years — hospital teams, office celebrations, and organizations like Planned Parenthood. Tell us about your event and we'll respond within 24 hours.</p>
   </div>
 </section>
 
-<section class="section container" style="padding-top:20px">
-  <div class="recipe-list">
-    <div class="recipe-item">
-      <span class="num">01 · Technique</span>
-      <span><h3>The 24-hour rest</h3><p>Why chilling your dough overnight makes it taste like a bakery, not a batch.</p></span>
-      <span class="meta">Nurse Jeanie · 4 min read</span>
+<section class="section container form-wrap">
+  <form onsubmit="sendCateringInquiry(event)">
+    <div class="form-grid">
+      <div>
+        <label for="name">Full name <span class="req">*</span></label>
+        <input id="name" name="name" required autocomplete="name">
+      </div>
+      <div>
+        <label for="company">Company / organization</label>
+        <input id="company" name="company" autocomplete="organization">
+      </div>
+      <div>
+        <label for="email">Email <span class="req">*</span></label>
+        <input id="email" name="email" type="email" required autocomplete="email">
+      </div>
+      <div>
+        <label for="phone">Phone <span class="req">*</span></label>
+        <input id="phone" name="phone" type="tel" required autocomplete="tel">
+      </div>
+      <div>
+        <label for="eventType">Event type <span class="req">*</span></label>
+        <select id="eventType" name="eventType" required>
+          <option value="">Choose…</option>
+          <option>Wedding</option>
+          <option>Shower</option>
+          <option>Birthday</option>
+          <option>Corporate event</option>
+          <option>Pop-up</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="eventDate">Event date <span class="req">*</span></label>
+        <input id="eventDate" name="eventDate" type="date" required>
+      </div>
+      <div>
+        <label for="guests">Guest count <span class="req">*</span></label>
+        <input id="guests" name="guests" type="number" min="1" required>
+      </div>
+      <div>
+        <label for="city">Delivery city, state <span class="req">*</span></label>
+        <input id="city" name="city" required>
+      </div>
+      <div class="full">
+        <label for="details">What are you thinking? <span class="req">*</span></label>
+        <textarea id="details" name="details" required placeholder="Cookie trays for 80, a sourdough board, mini boxes as favors…"></textarea>
+      </div>
+      <div class="full">
+        <button type="submit" class="btn btn-primary" style="width:100%">Send catering inquiry</button>
+        <p style="text-align:center;margin-top:14px;font-family:var(--font-mono);font-size:.75rem">or email us directly · <a href="mailto:catering@3wishesbakery.com">catering@3wishesbakery.com</a></p>
+      </div>
     </div>
-    <div class="recipe-item">
-      <span class="num">02 · From my kitchen</span>
-      <span><h3>Brown butter, always</h3><p>The 8-minute step that turned my cookies into the ones people ask about.</p></span>
-      <span class="meta">Nurse Jeanie · 3 min read</span>
-    </div>
-    <div class="recipe-item">
-      <span class="num">03 · Pantry note</span>
-      <span><h3>Salt is not optional</h3><p>How a pinch of Maldon on top makes the chocolate taste like more chocolate.</p></span>
-      <span class="meta">Nurse Jeanie · 2 min read</span>
-    </div>
-    <div class="recipe-item">
-      <span class="num">04 · Patti's kitchen</span>
-      <span><h3>Feeding your starter (like a person you love)</h3><p>Patti's honest, forgiving routine for a sourdough starter that actually shows up.</p></span>
-      <span class="meta">Nurse Patti · 5 min read</span>
-    </div>
-    <div class="recipe-item">
-      <span class="num">05 · Nurse's tip</span>
-      <span><h3>Keeping cookies fresh (for real)</h3><p>Airtight, cool, and one weird trick with a slice of bread.</p></span>
-      <span class="meta">Nurse Jeanie · 2 min read</span>
-    </div>
-  </div>
+  </form>
 </section>
 
 <footer class="site-footer">
