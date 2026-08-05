@@ -212,7 +212,16 @@
       { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
     );
 
-    [...singles, ...groups].forEach(el => io.observe(el));
+    const watched = [...singles, ...groups];
+    watched.forEach(el => io.observe(el));
+
+    // Safety net: reveal animations hide content until they fire. If anything
+    // is still hidden after 6s — observer edge case, offscreen container,
+    // a deep link that skipped past it — show it. Content is never optional.
+    setTimeout(() => {
+      watched.forEach(el => el.classList.add("in"));
+      io.disconnect();
+    }, 6000);
   }
 
   /* ------------------------------------------------------------
