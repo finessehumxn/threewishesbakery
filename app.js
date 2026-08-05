@@ -299,7 +299,26 @@ function addFromCard(cardEl) {
   const key = cardEl.dataset.product;
   const pressed = cardEl.querySelector('.size-btn[aria-pressed="true"]');
   const idx = pressed ? Number(pressed.dataset.sizeIndex) : 0;
+  grantWish(cardEl.querySelector(".add-btn"));
   addToCart(key, idx);
+}
+
+/* The wish-granted moment: smoke off the button, then the cart reacts.
+   Purely decorative — magic.js may not be loaded, and that's fine. */
+function grantWish(btn) {
+  const fx = window.TWMagic;
+  if (btn) {
+    btn.classList.remove("granting");
+    void btn.offsetWidth; // restart the animation on rapid clicks
+    btn.classList.add("granting");
+    if (fx) fx.poofAt(btn, { count: 12, rise: 150 });
+  }
+  const cart = document.querySelector(".cart-btn");
+  if (cart) {
+    cart.classList.remove("filled");
+    void cart.offsetWidth;
+    setTimeout(() => cart.classList.add("filled"), 140);
+  }
 }
 
 /* catering form → email */
@@ -345,6 +364,10 @@ document.addEventListener("keydown", e => {
 function sendWishes(e) {
   e.preventDefault();
   const f = e.target;
+  if (window.TWMagic) {
+    const btn = f.querySelector('button[type="submit"]');
+    window.TWMagic.poofAt(btn, { count: 18, rise: 220, spread: 150, sparks: 16 });
+  }
   const g = n => (f.elements[n] ? f.elements[n].value : "");
   const body = [
     `Name: ${g("wname")}`,

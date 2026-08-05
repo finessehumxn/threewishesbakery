@@ -7,6 +7,7 @@
 <link rel="icon" href="favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="magic.css">
 </head>
 <body>
 <section class="section container" style="text-align:center;padding-top:90px">
@@ -17,5 +18,16 @@
   <a class="btn btn-primary" href="index.html">Back to the bakery →</a>
 </section>
 <script>try{localStorage.removeItem("tw_cart")}catch(e){}</script>
+<script src="magic.js"></script>
+<script>
+/* the order landed — celebrate with a full genie burst */
+window.addEventListener("load", () => {
+  if (!window.TWMagic) return;
+  const x = innerWidth / 2, y = innerHeight * 0.34;
+  window.TWMagic.poof(x, y, { count: 22, rise: 280, spread: 220, sparks: 20 });
+  setTimeout(() => window.TWMagic.poof(x - 120, y + 40, { count: 12, rise: 200 }), 260);
+  setTimeout(() => window.TWMagic.poof(x + 120, y + 40, { count: 12, rise: 200 }), 420);
+});
+</script>
 </body>
 </html>

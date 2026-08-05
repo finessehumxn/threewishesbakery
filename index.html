@@ -39,6 +39,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="magic.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Do you deliver gourmet cookies nationwide?","acceptedAnswer":{"@type":"Answer","text":"Yes. Three Wishes Bakery bakes to order in California and ships anywhere in the USA in temperature-controlled packaging, arriving in 1-2 business days. Free shipping on orders $100+."}},
@@ -499,9 +500,9 @@
     <form onsubmit="sendWishes(event)" style="display:grid;gap:12px">
       <input name="wname" required placeholder="Your name" aria-label="Your name">
       <input name="wemail" type="email" required placeholder="Your email" aria-label="Your email">
-      <input name="wish1" required placeholder="Wish #1 ✦" aria-label="Wish 1">
-      <input name="wish2" placeholder="Wish #2 ✦" aria-label="Wish 2">
-      <input name="wish3" placeholder="Wish #3 ✦" aria-label="Wish 3">
+      <div class="wish-field"><input name="wish1" required placeholder="Wish #1 ✦" aria-label="Wish 1"></div>
+      <div class="wish-field"><input name="wish2" placeholder="Wish #2 ✦" aria-label="Wish 2"></div>
+      <div class="wish-field"><input name="wish3" placeholder="Wish #3 ✦" aria-label="Wish 3"></div>
       <button type="submit" class="btn btn-primary" style="border-color:var(--rose)">Send my three wishes ✦</button>
     </form>
   </div>
@@ -593,5 +594,6 @@
 </aside>
 
 <script src="app.js"></script>
+<script src="magic.js"></script>
 </body>
 </html>
