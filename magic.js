@@ -158,6 +158,7 @@
     stageEl.innerHTML =
       LAMP_SVG +
       '<i class="lamp-smoke"></i><i class="lamp-smoke"></i><i class="lamp-smoke"></i>' +
+      '<i class="lamp-smoke"></i><i class="lamp-smoke"></i>' +
       '<span class="lamp-hint">rub the lamp ✦</span>';
     ctas.insertAdjacentElement("afterend", stageEl);
 
@@ -244,11 +245,44 @@
   /* ------------------------------------------------------------
      Boot.
      ------------------------------------------------------------ */
+  /* ------------------------------------------------------------
+     Cursor sparkle trail — desktop only, throttled to one spark
+     every ~60ms so it reads as a trail, not a particle storm.
+     ------------------------------------------------------------ */
+  function mountTrail() {
+    if (!on() || coarse.matches) return;
+    let last = 0;
+    document.addEventListener("pointermove", e => {
+      const now = performance.now();
+      if (now - last < 60) return;
+      last = now;
+      sparkle(e.clientX, e.clientY, 1);
+    });
+  }
+
+  /* ------------------------------------------------------------
+     The arrival — the genie announces itself on first paint.
+     ------------------------------------------------------------ */
+  function mountArrival() {
+    if (!on()) return;
+    const hero = document.querySelector(".hero-photo") || document.querySelector(".hero");
+    if (!hero) return;
+    const r = hero.getBoundingClientRect();
+    setTimeout(() => {
+      poof(r.left + r.width / 2, r.top + r.height / 2, {
+        count: 20, rise: 240, spread: 200, sparks: 18,
+      });
+    }, 420);
+  }
+
   function init() {
     mountFog();
     mountReveals();
     mountWishForm();
-    if (on()) mountLamp();
+    mountLamp();      // the lamp is part of the brand, not just an animation —
+                      // it mounts even under reduced motion, it just holds still
+    mountTrail();
+    mountArrival();
   }
 
   if (document.readyState === "loading") {
