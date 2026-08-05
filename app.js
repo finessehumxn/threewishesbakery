@@ -262,8 +262,17 @@ async function checkout() {
 }
 
 /* ---------- drawer / UI ---------- */
-function openCart() { document.body.classList.add("cart-open"); }
+function openCart() { closeNav(); document.body.classList.add("cart-open"); }
 function closeCart() { document.body.classList.remove("cart-open"); }
+
+/* ---------- mobile nav ---------- */
+function setNav(open) {
+  document.body.classList.toggle("nav-open", open);
+  const btn = document.querySelector(".nav-toggle");
+  if (btn) btn.setAttribute("aria-expanded", String(open));
+}
+function toggleNav() { setNav(!document.body.classList.contains("nav-open")); }
+function closeNav() { setNav(false); }
 
 let toastTimer;
 function toast(msg) {
@@ -320,7 +329,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("img[data-optional]").forEach(img => {
     img.addEventListener("error", () => { img.style.display = "none"; });
   });
+  // tapping a nav link closes the mobile menu (in-page anchors don't reload)
+  document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", closeNav));
   renderCart();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  closeNav();
+  closeCart();
 });
 
 

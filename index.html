@@ -56,17 +56,21 @@
 <header class="site-header">
   <nav class="nav container" aria-label="Main">
     <a class="brand" href="index.html">
-      <span class="brand-mark"><img src="logo-pink.jpg" alt="" data-optional onerror="this.style.display='none'">✦</span>
+      <span class="brand-mark"><img src="logo-mark.jpg" alt="" data-optional onerror="this.style.display='none'" width="128" height="128" fetchpriority="high" decoding="async">✦</span>
       <span class="brand-name">Three Wishes<small>Bakery · CA</small></span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#drop">How to Order</a></li>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#menu">Menu</a></li>
+      <li><a href="#drop">How to Order</a></li>
       <li><a href="#minis">Mini Packs</a></li>
       <li><a href="story.html">Our Story</a></li>
       <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="catering.html">Catering</a></li>
     </ul>
-    <button class="cart-btn" onclick="openCart()">🛒 Cart <span data-cart-count>0</span></button>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">🛒 <span class="cart-word">Cart </span><span data-cart-count>0</span></button>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()"><span></span><span></span><span></span></button>
+    </div>
   </nav>
 </header>
 
@@ -86,7 +90,7 @@
       </div>
     </div>
     <div class="hero-photo hero-float">
-      <img src="cookie-hero.jpg" alt="Warm chocolate chip cookies fresh from the oven" data-optional>
+      <img src="cookie-hero.jpg" alt="Warm chocolate chip cookies fresh from the oven" data-optional width="1280" height="1280" fetchpriority="high" decoding="async">
       <span class="sticker tr">Nurse Owned</span>
       <span class="sticker bl">Twin Sister Recipe</span>
     </div>
@@ -153,7 +157,7 @@
 
     <article class="card" data-product="classic">
       <div class="card-photo">
-        <img src="real-classic.jpg" alt="The Classic Wish chocolate chip cookies" data-optional>
+        <img src="real-classic.jpg" alt="The Classic Wish chocolate chip cookies" data-optional width="1280" height="960" loading="lazy" decoding="async">
         <span class="tag">Fan Favorite</span><span class="price-chip">from $15</span>
       </div>
       <div class="card-body">
@@ -170,7 +174,7 @@
 
     <article class="card" data-product="cocoa">
       <div class="card-photo">
-        <img src="real-cocoa-white.jpg" alt="Cozy Cocoa Wish dark chocolate cookies with white chocolate" data-optional>
+        <img src="real-cocoa-white.jpg" alt="Cozy Cocoa Wish dark chocolate cookies with white chocolate" data-optional width="960" height="1280" loading="lazy" decoding="async">
         <span class="tag">Chocolate</span><span class="price-chip">from $15</span>
       </div>
       <div class="card-body">
@@ -187,7 +191,7 @@
 
     <article class="card" data-product="whitechip">
       <div class="card-photo">
-        <img src="real-white-chip.jpg" alt="White Chip Wish brown butter cookies" data-optional>
+        <img src="real-white-chip.jpg" alt="White Chip Wish brown butter cookies" data-optional width="960" height="1280" loading="lazy" decoding="async">
         <span class="tag">Jeanie's Pick ✦</span><span class="price-chip">from $15</span>
       </div>
       <div class="card-body">
@@ -204,7 +208,7 @@
 
     <article class="card" data-product="pbsandwich">
       <div class="card-photo">
-        <img src="pb-sandwich.jpg" alt="PB Wish sandwich cookies with peanut butter filling" data-optional>
+        <img src="pb-sandwich.jpg" alt="PB Wish sandwich cookies with peanut butter filling" data-optional width="1280" height="1280" loading="lazy" decoding="async">
         <span class="tag">Peanut Butter</span><span class="price-chip">from $15</span>
       </div>
       <div class="card-body">
@@ -221,7 +225,7 @@
 
     <article class="card" data-product="variety">
       <div class="card-photo">
-        <img src="real-lineup.jpg" alt="Baker's Variety Wish mixed cookie lineup" data-optional>
+        <img src="real-lineup.jpg" alt="Baker's Variety Wish mixed cookie lineup" data-optional width="1280" height="960" loading="lazy" decoding="async">
         <span class="tag">Best of Both</span><span class="price-chip">from $15</span>
       </div>
       <div class="card-body">
@@ -238,7 +242,7 @@
 
     <article class="card" data-product="doughsleeve">
       <div class="card-photo">
-        <img src="dough-balls.jpg" alt="Take and bake cookie dough pucks on a tray" data-optional>
+        <img src="dough-balls.jpg" alt="Take and bake cookie dough pucks on a tray" data-optional width="960" height="1280" loading="lazy" decoding="async">
         <span class="tag">Freezer-Ready</span><span class="price-chip">from $22</span>
       </div>
       <div class="card-body">
@@ -266,7 +270,7 @@
 
     <article class="card" data-product="brownies">
       <div class="card-photo">
-        <img src="brownie.jpg" alt="Gooey Wish Brownies with crackle tops" data-optional>
+        <img src="brownie.jpg" alt="Gooey Wish Brownies with crackle tops" data-optional width="1280" height="1280" loading="lazy" decoding="async">
         <span class="tag">Fudgy</span><span class="price-chip">from $18</span>
       </div>
       <div class="card-body">
@@ -283,7 +287,7 @@
 
     <article class="card" data-product="lemonloaf">
       <div class="card-photo">
-        <img src="real-lemon-loaf.jpg" alt="Golden Lemon Bliss Loaf with vanilla glaze" data-optional>
+        <img src="real-lemon-loaf.jpg" alt="Golden Lemon Bliss Loaf with vanilla glaze" data-optional width="720" height="768" loading="lazy" decoding="async">
         <span class="tag">Loaf</span><span class="price-chip">from $14</span>
       </div>
       <div class="card-body">
@@ -299,7 +303,7 @@
 
     <article class="card" data-product="tangybars">
       <div class="card-photo">
-        <img src="lemon-bar.jpg" alt="Tangy Wish Bars with homemade crust" data-optional>
+        <img src="lemon-bar.jpg" alt="Tangy Wish Bars with homemade crust" data-optional width="1280" height="1280" loading="lazy" decoding="async">
         <span class="tag">Bars</span><span class="price-chip">from $18</span>
       </div>
       <div class="card-body">
@@ -327,7 +331,7 @@
 
     <article class="card" data-product="sourclassic">
       <div class="card-photo">
-        <img src="real-sourdough-boule.jpg" alt="Classic sourdough boule with crackling crust" data-optional>
+        <img src="real-sourdough-boule.jpg" alt="Classic sourdough boule with crackling crust" data-optional width="960" height="1280" loading="lazy" decoding="async">
         <span class="tag">Handcrafted</span><span class="price-chip">from $7</span>
       </div>
       <div class="card-body">
@@ -343,7 +347,7 @@
 
     <article class="card" data-product="sourbacon">
       <div class="card-photo">
-        <img src="real-sourdough-bacon.jpg" alt="Bacon and cheddar sourdough loaf" data-optional>
+        <img src="real-sourdough-bacon.jpg" alt="Bacon and cheddar sourdough loaf" data-optional width="1280" height="960" loading="lazy" decoding="async">
         <span class="tag">Signature</span><span class="price-chip">from $9</span>
       </div>
       <div class="card-body">
@@ -399,7 +403,7 @@
 <section class="section container" id="sisters">
   <div class="sisters">
     <div class="sisters-photo">
-      <img src="sisters.jpg" alt="Jeanie and Patti, twin sisters and founders of Three Wishes Bakery" data-optional>
+      <img src="sisters.jpg" alt="Jeanie and Patti, twin sisters and founders of Three Wishes Bakery" data-optional width="591" height="546" loading="lazy" decoding="async">
     </div>
     <div>
       <span class="eyebrow">EST · California — Jeanie ✦ Patti</span>

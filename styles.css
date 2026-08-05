@@ -57,7 +57,7 @@ h1,h2{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-sp
   background:rgba(253,242,242,.92);backdrop-filter:blur(8px);
   border-bottom:2px solid var(--dough);
 }
-.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:16px;position:relative}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand-mark{
   width:42px;height:42px;border-radius:50%;
@@ -82,11 +82,51 @@ h1,h2{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-sp
   box-shadow:var(--shadow-pop);transition:transform .15s;
 }
 .cart-btn:hover{transform:translateY(-2px)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-toggle{
+  display:none;
+  border:2px solid var(--cocoa);background:var(--white);
+  border-radius:14px;padding:9px 11px;line-height:0;
+  box-shadow:var(--shadow-pop);
+}
+.nav-toggle span{
+  display:block;width:20px;height:2px;background:var(--cocoa);
+  border-radius:2px;transition:transform .2s,opacity .2s;
+}
+.nav-toggle span+span{margin-top:5px}
+body.nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.nav-open .nav-toggle span:nth-child(2){opacity:0}
+body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 :focus-visible{outline:3px solid var(--rose-deep);outline-offset:2px}
-@media (max-width:760px){.nav-links{display:none}}
+@media (max-width:760px){
+  .nav-toggle{display:block}
+  .nav-links{
+    display:none;
+    position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--cream);border-bottom:2px solid var(--dough);
+    padding:6px 20px 14px;
+  }
+  body.nav-open .nav-links{display:flex}
+  .nav-links a{
+    display:block;padding:13px 2px;font-size:1rem;
+    border-bottom:1px solid var(--dough);
+  }
+  .nav-links li:last-child a{border-bottom:none}
+  .nav-links a:hover,.nav-links a:focus-visible{border-bottom-color:var(--dough);color:var(--rose-deep)}
+  /* keep the whole row inside 360px: shorter labels, tighter gaps */
+  .nav{gap:8px}
+  .nav-right{gap:8px}
+  .cart-btn{padding:8px 12px;font-size:.82rem}
+  .cart-btn .cart-word{display:none}
+  .brand{gap:8px}
+  .brand-mark{width:36px;height:36px}
+  .brand-name{font-size:.98rem}
+  .brand-name small{font-size:.54rem;letter-spacing:.14em}
+}
 
 /* ---------- hero ---------- */
-.hero{padding:76px 0 60px;position:relative;overflow:hidden}
+.hero{padding:56px 20px 60px;position:relative;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
 .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);margin:10px 0 20px}
 .hero p.lede{font-size:1.12rem;max-width:44ch;color:#4a3a3d}
@@ -126,7 +166,7 @@ h1,h2{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-sp
 @keyframes scroll{to{transform:translateX(-50%)}}
 
 /* ---------- badges ---------- */
-.badges{padding:44px 0;text-align:center}
+.badges{padding:44px 20px;text-align:center}
 .badges h2{font-size:1.3rem;margin-bottom:18px}
 .badge-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .badge{
@@ -135,7 +175,7 @@ h1,h2{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-sp
 }
 
 /* ---------- sections & product grid ---------- */
-.section{padding:70px 0}
+.section{padding:70px 20px}
 .section-head{max-width:60ch;margin-bottom:38px}
 .section-head h2{font-size:clamp(1.9rem,4vw,2.8rem)}
 .section-head p{margin-top:10px;color:#4a3a3d}
@@ -275,7 +315,7 @@ textarea{min-height:130px;resize:vertical}
 @media (max-width:640px){.form-grid{grid-template-columns:1fr}}
 
 /* ---------- page hero (inner pages) ---------- */
-.page-hero{padding:64px 0 30px}
+.page-hero{padding:64px 20px 30px}
 .page-hero h1{font-size:clamp(2.2rem,5vw,3.4rem);margin-top:8px}
 .page-hero p{max-width:56ch;margin-top:14px;color:#4a3a3d}
 

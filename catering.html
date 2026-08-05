@@ -18,16 +18,21 @@
 <header class="site-header">
   <nav class="nav container" aria-label="Main">
     <a class="brand" href="index.html">
-      <span class="brand-mark">✦</span>
+      <span class="brand-mark"><img src="logo-mark.jpg" alt="" data-optional onerror="this.style.display='none'" width="128" height="128" fetchpriority="high" decoding="async">✦</span>
       <span class="brand-name">Three Wishes<small>Catering</small></span>
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html#menu">Menu</a></li>
+      <li><a href="index.html#drop">How to Order</a></li>
       <li><a href="index.html#minis">Mini Packs</a></li>
       <li><a href="story.html">Our Story</a></li>
       <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="catering.html" aria-current="page">Catering</a></li>
     </ul>
-    <button class="cart-btn" onclick="openCart()">🛒 Cart <span data-cart-count>0</span></button>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">🛒 <span class="cart-word">Cart </span><span data-cart-count>0</span></button>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()"><span></span><span></span><span></span></button>
+    </div>
   </nav>
 </header>
 
