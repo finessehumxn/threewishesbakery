@@ -69,6 +69,16 @@ export default async (req) => {
   });
   const data = await resp.json();
   if (!resp.ok || !data.url) {
+    // Stripe explains exactly what it didn't like — bad key, test/live mismatch,
+    // account not activated. Log it so it's readable in Netlify → Logs → Functions.
+    // Never returned to the browser: it can name account details.
+    console.error("Stripe rejected the checkout session:", {
+      status: resp.status,
+      type: data?.error?.type,
+      code: data?.error?.code,
+      message: data?.error?.message,
+      param: data?.error?.param,
+    });
     return new Response(JSON.stringify({ error: "stripe_error" }), { status: 502, headers });
   }
   return new Response(JSON.stringify({ url: data.url }), { status: 200, headers });

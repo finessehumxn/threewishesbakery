@@ -1,2 +1,26 @@
+# Three Wishes Bakery — Netlify config
+#
+# There is no build step. The site is plain HTML/CSS/JS served straight from
+# the repo root, so `command` is intentionally empty and `publish` is ".".
+# This is what lets the site be deployed by linking the Git repo instead of
+# drag-and-dropping a folder.
+
+[build]
+  command = ""
+  publish = "."
+
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Long-cache the photos (they're content-addressed by name and rarely change);
+# keep HTML uncached so a deploy is visible immediately.
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
