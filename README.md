@@ -1,56 +1,103 @@
-# Three Wishes Bakery — clean static rebuild
+# Three Wishes Bakery
 
 Twin nurse-owned small-batch bakery ✦ Jeanie & Patti ✦ California.
-Pure HTML/CSS/JS — no build step, no framework, no Lovable dependencies. Deploys straight to GitHub Pages.
 
-## Structure (flat — matches the live repo)
+Plain HTML, CSS, and JavaScript. No build step, no framework, no dependencies —
+edit a file, refresh the browser, push.
+
+- **Repo:** https://github.com/finessehumxn/threewishesbakery
+- **Live (GitHub Pages):** https://finessehumxn.github.io/threewishesbakery/
+- **Old pre-rebuild history:** preserved on the `pre-rebuild-backup` branch
+
+## Files
 
 ```
-index.html          Homepage
-catering/index.html Catering page
-recipes/index.html  Recipes page
-styles.css          Stylesheet
-app.js              Cart, prices, Stripe links — EDIT HERE
-*.jpg               All photos live at the root
-favicon.ico         Genie-lamp favicon
+index.html              Homepage — hero, menu, gallery, wishes, FAQ
+story.html              Our story — Jeanie, Patti, and George
+catering.html           Catering inquiry form
+recipes.html            Recipe index
+recipe-*.html           The five articles
+thanks.html             Post-checkout landing page (Stripe returns here)
+
+styles.css              Layout, components, typography
+magic.css / magic.js    The genie layer — smoke, sparkles, reveals
+app.js                  Cart, prices, checkout  ← EDIT PRICES HERE
+
+netlify/functions/
+  checkout.mjs          Cart → Stripe Checkout session (the real checkout)
+  seed.mjs              One-time Stripe product catalog seeder
+netlify.toml            Points Netlify at the functions directory
+
+*.jpg                   All photos live at the root
+logo-mark.jpg           128px header logo (logo-pink.jpg is the full-size original)
 ```
 
-## Deploy to GitHub Pages (and wipe the Lovable bot from Contributors in the same move)
+## Editing prices
 
-The contributors list on GitHub is computed from **commit history** — deleting the `.lovable` folder doesn't remove `lovable-dev[bot]`. The only way to remove it is to replace the history. Since this is a full rebuild anyway, start fresh:
+Every price lives in `PRODUCTS` at the top of `app.js`, as dollars:
 
-```bash
-# 1. New empty folder with ONLY these rebuild files in it
-cd threewishes
-
-# 2. Fresh history authored by you
-git init -b main
-git add .
-git commit -m "Three Wishes Bakery — clean static rebuild"
-
-# 3. Point at the existing repo and overwrite everything
-git remote add origin https://github.com/finessehumxn/3wishesbakery.git
-git push --force origin main
+```js
+classic: {
+  name: "The Classic Wish",
+  sizes: [
+    { label: "6",  price: 15, stripeLink: "" },
+    ...
 ```
 
-Then in the repo: **Settings → Pages → Source: Deploy from a branch → main / (root) → Save.**
-Site goes live at `https://finessehumxn.github.io/3wishesbakery/`.
+Change the number, save, push. The cart, the totals, and the Stripe line items
+all read from this one place.
 
-Also do these two so the bot can't come back:
-1. **Uninstall the Lovable GitHub App**: github.com → your avatar → Settings → Applications → Installed GitHub Apps → Lovable → Configure → Uninstall (or remove this repo from its access list).
-2. Inside Lovable, disconnect the GitHub integration for this project.
+## Turning on card payments
 
-The Contributors panel is cached — it can take a few hours to a day to refresh after the force-push. If you want it gone instantly, the nuclear option is: delete the repo entirely and create a new `3wishesbakery` repo, then push this code — a brand-new repo has only your commits from second one.
+**The checkout code is finished.** `netlify/functions/checkout.mjs` builds a real
+Stripe Checkout session from whatever is in the cart, applies the $100 free-shipping
+threshold, handles the pickup/delivery options, and sends the customer to Stripe.
 
-> Note: `--force` erases the old TanStack/Lovable history permanently. You already have the export zip as a backup; if you want the old code too, download the repo zip first (Code → Download ZIP).
+It just needs a host that can run functions — **GitHub Pages cannot.** On Pages,
+`/api/checkout` returns a 404, and `checkout()` in `app.js` quietly falls back to
+composing an order email instead. Orders still arrive; they just aren't paid for
+online.
 
-## Before launch checklist
+To switch it on:
 
-1. **Photos** — the Lovable export referenced images on Lovable's CDN, which aren't included and will die when you disconnect. Save your real photos into `images/` using the filenames in `images/README.md`. Until then, cards show a branded rose/dough gradient instead of a broken image.
-2. **Prices** — `js/app.js` → `PRODUCTS`. The "from" prices ($18 cookies, $14 loaf, $9 sourdough…) match your original site; the larger-size prices are placeholders I set — confirm/change them.
-3. **Stripe checkout** — you're already in the right screen (Payment Links → Create link → "Products or subscriptions"):
-   - **Main store link (do this first):** add your products to one Payment Link, turn on "Let customers adjust quantity" in Options, hit Create, and copy the `buy.stripe.com/...` URL. Paste it into `STRIPE_CHECKOUT_LINK` at the top of `js/app.js`. From that moment, the cart's **Checkout button sends every customer to Stripe payments.**
-   - **Optional per-product links:** you can also create one Payment Link per product/size and paste each URL into that size's `stripeLink` in `PRODUCTS` — then a customer buying a single item lands directly on that product's Stripe page.
-   - Only if no links are set does Checkout fall back to composing an order email to hello@3wishesbakery.com.
-4. **Socials** — footer Instagram/TikTok links are placeholders; point them at the real profiles.
-5. **Custom domain** (optional) — Settings → Pages → Custom domain (e.g. 3wishesbakery.com), then add the CNAME/A records at your registrar.
+1. Go to [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import an
+   existing project** → GitHub → pick `threewishesbakery`.
+2. Leave the build command empty and the publish directory as `.`. Deploy.
+3. In **Site configuration → Environment variables**, add:
+   - `STRIPE_SECRET_KEY` — your live secret key from the Stripe dashboard
+   - `SHIP_RATE_CENTS` — optional, defaults to `1500` ($15 nationwide cold-pack)
+4. Redeploy. Card checkout is now live.
+
+> Never paste the secret key into a file in this repo. It belongs only in Netlify's
+> environment variables — the repo is public.
+
+### The fallback chain
+
+`checkout()` tries these in order, so the store always does *something*:
+
+1. `POST /api/checkout` → real Stripe Checkout **(needs Netlify)**
+2. A single-item cart whose size has a `stripeLink` → that Payment Link
+3. `STRIPE_CHECKOUT_LINK` set at the top of `app.js` → that Payment Link
+4. An itemized order email to `hello@3wishesbakery.com`
+
+## Custom domain
+
+Once Netlify is live: **Domain management → Add a custom domain** → `3wishesbakery.com`,
+then follow its DNS instructions at your registrar. The `canonical` and `og:url` tags
+in the HTML already point at that domain.
+
+## Still to do
+
+- **Social links** — the Instagram and TikTok links in the footer point at
+  `instagram.com` and `tiktok.com`. The whole ordering model depends on Instagram
+  ("menu reveals Sundays"), so these need the real handles.
+- **Re-shoot `extra-pumpkin-cheesecake.jpg`** — it has social-media text burned into
+  the frame, so it's the one photo not used on the site.
+- **Confirm the larger-size prices** in `app.js`. The "from" prices match the
+  original site; the bigger sizes were placeholders.
+
+## Accessibility & motion
+
+Every animation — the lamp, the smoke, the reveals, the marquee — is switched off
+under `prefers-reduced-motion: reduce`. Reveal animations also force themselves
+visible after 6 seconds so content can never get stuck hidden.
