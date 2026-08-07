@@ -614,3 +614,8 @@ textarea{min-height:130px;resize:vertical}
   width:100%;min-height:auto;font-family:var(--font-mono);font-size:.72rem;
   background:#fff;color:#1a0f2b;border:1px solid var(--iris);border-radius:8px;padding:8px;
 }
+
+/* The cart drawer's title is the dialog's label, not part of the page outline —
+   it's a <p> so it can't create an h1->h3 jump, styled to match the old h3. */
+.drawer-title{font-family:var(--font-display);font-weight:700;font-size:1.05rem}
+.recipe-title{font-family:var(--font-display);font-size:1.3rem}
