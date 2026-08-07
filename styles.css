@@ -622,3 +622,11 @@ textarea{min-height:130px;resize:vertical}
 
 /* Wish Basket count, slightly de-emphasised beside the title */
 .basket-count{font-family:var(--font-mono);font-weight:400;font-size:.85rem;color:#c79bf0}
+
+/* allergen tags — a scannable list is easier to check than a paragraph */
+.allergen-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.allergen-tags span{
+  background:#2b1840;color:#f0e6fb;border:1px solid var(--iris);
+  border-radius:999px;padding:5px 13px;
+  font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+}
