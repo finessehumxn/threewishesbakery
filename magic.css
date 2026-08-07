@@ -17,7 +17,7 @@
   --iris-deep:#5b3a80;
   --iris-dark:#2b1840;
   --smoke:rgba(255,255,255,.85);
-  --smoke-rose:rgba(255,133,161,.55);
+  --smoke-rose:rgba(164,94,229,.55);
   --gold:#f5c451;
 }
 
@@ -38,10 +38,10 @@
   will-change:transform,opacity;
 }
 .puff.rose{
-  background:radial-gradient(circle at 35% 35%,rgba(255,183,201,.9),rgba(209,77,107,.5) 55%,transparent 72%);
+  background:radial-gradient(circle at 35% 35%,rgba(214,180,245,.9),rgba(107,63,158,.5) 55%,transparent 72%);
 }
 .puff.dark{
-  background:radial-gradient(circle at 35% 35%,rgba(90,60,66,.65),rgba(20,10,10,.35) 55%,transparent 72%);
+  background:radial-gradient(circle at 35% 35%,rgba(90,60,66,.65),rgba(28,16,48,.35) 55%,transparent 72%);
 }
 
 /* a four-point wish sparkle */
@@ -66,10 +66,15 @@
    Shop Cookies button — which it did, badly, at both desktop and phone sizes. */
 .lamp-stage{margin-left:auto;margin-right:0}
 .lamp{
-  position:absolute;bottom:0;left:0;width:210px;
-  filter:drop-shadow(0 8px 10px rgba(209,77,107,.4));
+  position:absolute;bottom:0;left:0;width:250px;height:auto;
+  /* lamp-logo.png carries real alpha (generated from the logo's luminance),
+     so no blend-mode trickery is needed. Stacked shadows give it volume. */
+  filter:
+    drop-shadow(0 10px 14px rgba(91,58,128,.34))
+    drop-shadow(0 2px 0 rgba(164,94,229,.28))
+    drop-shadow(0 0 22px rgba(164,94,229,.18));
   animation:lampSway 5.5s ease-in-out infinite;
-  transform-origin:55% 92%;
+  transform-origin:58% 88%;
 }
 @keyframes lampSway{
   0%,100%{transform:rotate(-3.5deg) translateY(0)}
@@ -78,11 +83,12 @@
 /* the plume curling out of the spout — deliberately opaque enough to read
    against the blush background, which the first pass was not */
 .lamp-smoke{
-  position:absolute;left:2px;bottom:92px;width:46px;height:46px;border-radius:50%;
+  /* the spout tip: ~3% across, ~29% down the lamp artwork */
+  position:absolute;left:0;bottom:96px;width:46px;height:46px;border-radius:50%;
   background:radial-gradient(circle at 38% 38%,
     rgba(255,255,255,.98),
-    rgba(255,183,201,.85) 45%,
-    rgba(209,77,107,.5) 70%,
+    rgba(214,180,245,.85) 45%,
+    rgba(107,63,158,.5) 70%,
     transparent 80%);
   filter:blur(7px);opacity:0;
   animation:wisp 4.6s ease-out infinite;
@@ -102,16 +108,16 @@
 }
 /* the invitation — only worth showing where there's a cursor to rub with */
 .lamp-hint{
-  position:absolute;left:216px;bottom:34px;white-space:nowrap;
+  position:absolute;left:0;bottom:-6px;white-space:nowrap;
   font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;
   /* 3.84:1 -> AA at this size */
-  text-transform:uppercase;color:#a83a56;font-weight:700;
+  text-transform:uppercase;color:#6b3f9e;font-weight:700;
   animation:hintFade 3.4s ease-in-out infinite;
 }
 @keyframes hintFade{0%,100%{opacity:.4}50%{opacity:1}}
 @media (max-width:600px){
   .lamp-stage{height:150px;margin-top:24px}
-  .lamp{width:172px}
+  .lamp{width:200px}
   .lamp-smoke{bottom:76px}
   .lamp-hint{left:auto;right:0;bottom:30px;font-size:.58rem}
 }
@@ -142,8 +148,8 @@
 }
 /* the card itself lifts into a rose glow on hover */
 .card{transition:transform .18s,box-shadow .25s}
-.card:hover{box-shadow:6px 10px 0 0 var(--rose),0 0 34px rgba(255,133,161,.45)}
-.drop-tile:hover{box-shadow:5px 9px 0 0 var(--rose),0 0 30px rgba(255,133,161,.42)}
+.card:hover{box-shadow:6px 10px 0 0 var(--rose),0 0 34px rgba(164,94,229,.45)}
+.drop-tile:hover{box-shadow:5px 9px 0 0 var(--rose),0 0 30px rgba(164,94,229,.42)}
 
 /* ------------------------------------------------------------
    4. Scroll reveal — sections rise out of the smoke.
@@ -180,7 +186,7 @@
 /* toast arrives on a curl of smoke */
 .toast{
   background:linear-gradient(135deg,var(--cocoa),#2c1a1e);
-  box-shadow:0 0 0 3px rgba(255,133,161,.25),0 10px 30px rgba(20,10,10,.35);
+  box-shadow:0 0 0 3px rgba(164,94,229,.25),0 10px 30px rgba(28,16,48,.35);
 }
 .toast.show{animation:toastRise .35s cubic-bezier(.2,.8,.3,1)}
 @keyframes toastRise{
@@ -195,9 +201,9 @@
 .mystery-photo .fog{
   position:absolute;width:150%;height:150%;left:-25%;top:-25%;
   background:
-    radial-gradient(circle at 25% 40%,rgba(255,133,161,.4),transparent 38%),
+    radial-gradient(circle at 25% 40%,rgba(164,94,229,.4),transparent 38%),
     radial-gradient(circle at 70% 30%,rgba(255,255,255,.22),transparent 34%),
-    radial-gradient(circle at 55% 75%,rgba(209,77,107,.42),transparent 40%);
+    radial-gradient(circle at 55% 75%,rgba(107,63,158,.42),transparent 40%);
   filter:blur(14px);
   animation:fogTurn 22s linear infinite;
 }
@@ -211,7 +217,7 @@
 .wish-field{position:relative}
 .wish-field input:focus{
   border-color:var(--rose);
-  box-shadow:0 0 0 4px rgba(255,133,161,.28);
+  box-shadow:0 0 0 4px rgba(164,94,229,.28);
   outline:none;
 }
 .wish-field.granted::after{
@@ -254,7 +260,9 @@
 
 /* --- the smoke curtain: opaque, not a blur --- */
 .veil{
-  position:absolute;inset:-2px;z-index:4;pointer-events:none;
+  /* inset:0, not -2px — the bleed escaped the snap-scroll carousel on phones
+     and pushed the document 2px wide, producing a horizontal scrollbar */
+  position:absolute;inset:0;z-index:4;pointer-events:none;
   background:
     radial-gradient(circle at 22% 30%, var(--amethyst) 0 18%, transparent 46%),
     radial-gradient(circle at 74% 22%, var(--iris) 0 16%, transparent 44%),
@@ -278,9 +286,12 @@
 
 /* the little lamp that sits on an unrevealed image */
 .veil-lamp{
-  position:absolute;left:50%;top:50%;width:74px;margin:-37px 0 0 -37px;
+  position:absolute;left:50%;top:50%;width:132px;height:auto;
+  transform:translate(-50%,-50%);
   z-index:5;pointer-events:none;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));
+  /* a cream-inked copy of the same artwork, so it glows on the purple smoke
+     without needing invert/screen */
+  filter:drop-shadow(0 0 16px rgba(255,255,255,.5)) drop-shadow(0 4px 10px rgba(0,0,0,.45));
 }
 .veil-label{
   position:absolute;left:0;right:0;bottom:16px;z-index:5;text-align:center;
@@ -291,16 +302,18 @@
 
 /* --- the rattle: lamp shakes hard just before it blows --- */
 .wish-shot.rattling .veil-lamp{animation:rattle .5s cubic-bezier(.36,.07,.19,.97)}
+/* translate(-50%,-50%) has to be carried through every frame, or the lamp
+   jumps out of centre the moment the animation starts. */
 @keyframes rattle{
-  0%,100%{transform:translate(0,0) rotate(0)}
-  8%{transform:translate(-3px,1px) rotate(-7deg)}
-  18%{transform:translate(3px,-2px) rotate(7deg)}
-  28%{transform:translate(-4px,2px) rotate(-9deg) scale(1.04)}
-  38%{transform:translate(4px,-1px) rotate(9deg) scale(1.04)}
-  50%{transform:translate(-5px,2px) rotate(-11deg) scale(1.08)}
-  62%{transform:translate(5px,-2px) rotate(11deg) scale(1.08)}
-  74%{transform:translate(-3px,1px) rotate(-6deg) scale(1.12)}
-  88%{transform:translate(2px,0) rotate(4deg) scale(1.16)}
+  0%,100%{transform:translate(-50%,-50%) rotate(0)}
+  8%{transform:translate(calc(-50% - 3px),calc(-50% + 1px)) rotate(-7deg)}
+  18%{transform:translate(calc(-50% + 3px),calc(-50% - 2px)) rotate(7deg)}
+  28%{transform:translate(calc(-50% - 4px),calc(-50% + 2px)) rotate(-9deg) scale(1.04)}
+  38%{transform:translate(calc(-50% + 4px),calc(-50% - 1px)) rotate(9deg) scale(1.04)}
+  50%{transform:translate(calc(-50% - 5px),calc(-50% + 2px)) rotate(-11deg) scale(1.08)}
+  62%{transform:translate(calc(-50% + 5px),calc(-50% - 2px)) rotate(11deg) scale(1.08)}
+  74%{transform:translate(calc(-50% - 3px),calc(-50% + 1px)) rotate(-6deg) scale(1.12)}
+  88%{transform:translate(calc(-50% + 2px),-50%) rotate(4deg) scale(1.16)}
 }
 .wish-shot.rattling .veil{animation:veilTense .5s ease-in}
 @keyframes veilTense{
@@ -317,9 +330,9 @@
 }
 .wish-shot.blown .veil-lamp{animation:lampRecoil .6s cubic-bezier(.3,1.5,.5,1) forwards}
 @keyframes lampRecoil{
-  0%{transform:scale(1.16) rotate(4deg);opacity:1}
-  30%{transform:scale(1.5) rotate(-8deg);opacity:.9}
-  100%{transform:scale(2.4) rotate(-20deg) translateY(-24px);opacity:0}
+  0%{transform:translate(-50%,-50%) scale(1.16) rotate(4deg);opacity:1}
+  30%{transform:translate(-50%,-50%) scale(1.5) rotate(-8deg);opacity:.9}
+  100%{transform:translate(-50%,-64%) scale(2.4) rotate(-20deg);opacity:0}
 }
 .wish-shot.blown .veil-label{animation:labelOut .3s ease-out forwards}
 @keyframes labelOut{to{opacity:0;transform:translateY(-10px)}}

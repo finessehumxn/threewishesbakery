@@ -124,82 +124,21 @@
      The hero lamp — an SVG genie lamp that breathes smoke, and
      puffs on demand when you rub it.
      ------------------------------------------------------------ */
-  /* A single lamp drawing, reused at three sizes: the hero centrepiece, the
-     marker on each unrevealed image, and anywhere else it's wanted.
-     Volume comes from layered gradients — a top highlight, a core shadow, a
-     reflected bounce along the bottom edge, plus a specular hotspot. `uid`
-     keeps the gradient ids unique so multiple lamps on one page don't
-     inherit each other's <defs>. */
+  /* THE LAMP IS THE LOGO.
+     lamp-logo.png is cropped straight out of logo-pink.jpg — the ornate
+     engraved lamp with the tapered spout, the domed finial, the scrolled
+     C-handle and the pedestal foot. Earlier versions used a lamp I drew,
+     which was not the brand's lamp and looked nothing like it.
+
+     The source is black linework on cream, so blend modes do the work of a
+     transparent PNG: `multiply` drops the cream on light backgrounds, and
+     `invert + screen` turns it into glowing light linework on the dark
+     smoke veil. Volume comes from stacked drop-shadows in CSS.
+     `variant` picks which treatment applies. */
   function lampSVG(cls, uid) {
-    const g = n => `${n}-${uid}`;
-    return `
-<svg class="${cls}" viewBox="0 0 140 104" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Genie lamp">
-  <defs>
-    <radialGradient id="${g('body')}" cx="36%" cy="26%" r="82%">
-      <stop offset="0%" stop-color="#d9b3f2"/>
-      <stop offset="26%" stop-color="#a45ee5"/>
-      <stop offset="64%" stop-color="#7a45ad"/>
-      <stop offset="100%" stop-color="#3d2359"/>
-    </radialGradient>
-    <linearGradient id="${g('bounce')}" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="#c58ff0" stop-opacity=".85"/>
-      <stop offset="100%" stop-color="#c58ff0" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="${g('spout')}" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0%" stop-color="#5b3a80"/>
-      <stop offset="45%" stop-color="#9867c5"/>
-      <stop offset="100%" stop-color="#c99cee"/>
-    </linearGradient>
-    <linearGradient id="${g('lid')}" x1="0" y1="1" x2=".4" y2="0">
-      <stop offset="0%" stop-color="#7a45ad"/>
-      <stop offset="55%" stop-color="#b478ea"/>
-      <stop offset="100%" stop-color="#e3c9f8"/>
-    </linearGradient>
-    <radialGradient id="${g('gem')}" cx="34%" cy="30%" r="75%">
-      <stop offset="0%" stop-color="#fff6d8"/>
-      <stop offset="45%" stop-color="#f5c451"/>
-      <stop offset="100%" stop-color="#b8862a"/>
-    </radialGradient>
-    <linearGradient id="${g('handle')}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#b478ea"/>
-      <stop offset="60%" stop-color="#7a45ad"/>
-      <stop offset="100%" stop-color="#4a2c6b"/>
-    </linearGradient>
-  </defs>
-
-  <!-- contact shadow grounds it -->
-  <ellipse cx="68" cy="96" rx="44" ry="6" fill="rgba(43,24,64,.32)"/>
-
-  <!-- handle, behind the body -->
-  <path d="M101 55c23-7 30 4 28 16-2 11-13 15-27 14" stroke="url(#${g('handle')})" stroke-width="9" stroke-linecap="round"/>
-  <path d="M103 57c17-5 23 2 22 11" stroke="#d9b3f2" stroke-width="2.5" stroke-linecap="round" opacity=".75"/>
-
-  <!-- spout -->
-  <path d="M38 57 12 29l-7 8 25 28z" fill="url(#${g('spout')})"/>
-  <path d="M14 31 8 38l3 3 6-7z" fill="#e3c9f8" opacity=".55"/>
-  <ellipse cx="10" cy="33" rx="6.5" ry="5" transform="rotate(-42 10 33)" fill="#2b1840"/>
-  <ellipse cx="10" cy="33" rx="4" ry="2.8" transform="rotate(-42 10 33)" fill="#150b20"/>
-
-  <!-- body: base gradient, core shadow, reflected bounce, specular -->
-  <ellipse cx="67" cy="64" rx="37" ry="22" fill="url(#${g('body')})"/>
-  <path d="M30 64c0 13 17 22 37 22s37-9 37-22c0 0-9 15-37 15S30 64 30 64z" fill="#3d2359" opacity=".55"/>
-  <path d="M34 74c7 8 19 12 33 12s26-4 33-12c-6 11-19 17-33 17s-27-6-33-17z" fill="url(#${g('bounce')})"/>
-  <ellipse cx="51" cy="54" rx="15" ry="6.5" transform="rotate(-17 51 54)" fill="#fff" opacity=".42"/>
-  <ellipse cx="45" cy="51" rx="6" ry="2.6" transform="rotate(-20 45 51)" fill="#fff" opacity=".75"/>
-
-  <!-- lid -->
-  <path d="M47 46c4-12 11-17 20-17s16 5 20 17z" fill="url(#${g('lid')})"/>
-  <ellipse cx="67" cy="46" rx="21" ry="4.5" fill="#4a2c6b"/>
-  <path d="M56 34c2-3 6-5 10-5" stroke="#f0dffa" stroke-width="2" stroke-linecap="round" opacity=".8"/>
-
-  <!-- gem -->
-  <circle cx="67" cy="24" r="6.5" fill="url(#${g('gem')})"/>
-  <circle cx="65" cy="22" r="2" fill="#fffdf2"/>
-
-  <!-- foot -->
-  <path d="M45 84h44l7 9H38z" fill="#4a2c6b"/>
-  <path d="M45 84h44l1 2H44z" fill="#b478ea" opacity=".5"/>
-</svg>`;
+    // the veil sits on dark smoke, so it gets the cream-inked copy
+    const src = cls === "veil-lamp" ? "lamp-logo-light.png" : "lamp-logo.png";
+    return `<img class="${cls}" src="${src}" alt="" width="600" height="348" decoding="async">`;
   }
 
   let lampUid = 0;
@@ -361,27 +300,39 @@
       }, 500);
     };
 
+    /* Fire only when a tile reaches the middle band of the viewport, so each
+       one reveals as you actually scroll to it. A whole row still enters
+       together on desktop, so stagger by position — it cascades left to
+       right instead of the whole row popping at once. */
     const io = new IntersectionObserver(
       entries => {
-        entries.forEach(e => {
-          if (!e.isIntersecting) return;
-          grant(e.target);
-          io.unobserve(e.target);
+        const arriving = entries.filter(e => e.isIntersecting).map(e => e.target);
+        arriving.forEach((el, i) => {
+          io.unobserve(el);
+          setTimeout(() => grant(el), i * 220);
         });
       },
-      { rootMargin: "0px 0px -18% 0px", threshold: 0.45 }
+      { rootMargin: "-38% 0px -38% 0px", threshold: 0 }
     );
     shots.forEach(s => io.observe(s));
 
-    // Failsafe: never leave a product photo behind a curtain.
-    setTimeout(() => {
-      shots.forEach(s => {
-        if (s.dataset.granted) return;
-        s.dataset.granted = "1";
-        s.classList.add("blown");
-      });
-      io.disconnect();
-    }, 9000);
+    /* Safety without spoiling the effect: reveal only what the visitor has
+       already scroll PAST. A blanket timer used to blow every tile on the
+       page at once while they were still reading the hero, which is exactly
+       what "all at once" looked like. */
+    let sweeping;
+    addEventListener("scroll", () => {
+      clearTimeout(sweeping);
+      sweeping = setTimeout(() => {
+        shots.forEach(el => {
+          if (el.dataset.granted) return;
+          if (el.getBoundingClientRect().bottom < 0) {
+            el.dataset.granted = "1";
+            el.classList.add("blown");
+          }
+        });
+      }, 250);
+    }, { passive: true });
   }
 
   /* ------------------------------------------------------------
