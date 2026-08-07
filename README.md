@@ -1,9 +1,27 @@
 # Three Wishes Bakery
 
 Twin nurse-owned small-batch bakery ✦ Jeanie & Patti ✦ California.
+Designed and built by **Millennials Creatives LLC**.
 
 Plain HTML, CSS, and JavaScript. No build step, no framework, no dependencies —
 edit a file, refresh the browser, push.
+
+## Ownership
+
+This site has no third-party platform dependency. There is no `package.json`,
+no lockfile, no framework, and no generated code — it is hand-authored HTML,
+CSS, and JS that any static host can serve. Nothing about it can be locked to,
+or reclaimed by, a site builder.
+
+- Site code and design © Millennials Creatives LLC
+- Bakery brand, recipes, copy, and photography © Three Wishes Bakery
+- See [LICENSE](LICENSE) — the repo is public to be viewable as portfolio work,
+  which is not the same as being licensed for reuse.
+
+The genie effect system (`magic.css` + `magic.js`) is original work: an SVG lamp
+rendered with layered gradients for volume, a smoke-curtain reveal driven by
+IntersectionObserver, and a self-cleaning particle layer. ~600 lines, no
+libraries.
 
 - **Repo:** https://github.com/finessehumxn/threewishesbakery
 - **Live (GitHub Pages):** https://finessehumxn.github.io/threewishesbakery/
