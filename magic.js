@@ -136,9 +136,10 @@
      smoke veil. Volume comes from stacked drop-shadows in CSS.
      `variant` picks which treatment applies. */
   function lampSVG(cls, uid) {
-    // the veil sits on dark smoke, so it gets the cream-inked copy
-    const src = cls === "veil-lamp" ? "lamp-logo-light.png" : "lamp-logo.png";
-    return `<img class="${cls}" src="${src}" alt="" width="600" height="348" decoding="async">`;
+    // lamp-3d.png is the 3D render from the Lovable build — purple and gold
+    // with real alpha. Same asset at both sizes, so the hero lamp and the
+    // one sitting on each veiled image are unmistakably the same object.
+    return `<img class="${cls}" src="lamp-3d.png" alt="" width="560" height="420" decoding="async">`;
   }
 
   let lampUid = 0;
@@ -297,7 +298,7 @@
           spread: Math.max(120, r.width * 0.55),
           sparks: 14,
         });
-      }, 500);
+      }, 700);
     };
 
     /* Fire only when a tile reaches the middle band of the viewport, so each

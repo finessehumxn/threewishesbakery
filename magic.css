@@ -18,7 +18,7 @@
   --iris-dark:#2b1840;
   --smoke:rgba(255,255,255,.85);
   --smoke-rose:rgba(164,94,229,.55);
-  --gold:#f5c451;
+  --gold:#c9962f;
 }
 
 /* ------------------------------------------------------------
@@ -47,7 +47,7 @@
 /* a four-point wish sparkle */
 .spark{
   position:absolute;width:14px;height:14px;
-  background:var(--gold);
+  background:#e8b84b;
   clip-path:polygon(50% 0%,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0% 50%,42% 42%);
   will-change:transform,opacity;
 }
@@ -67,12 +67,8 @@
 .lamp-stage{margin-left:auto;margin-right:0}
 .lamp{
   position:absolute;bottom:0;left:0;width:250px;height:auto;
-  /* lamp-logo.png carries real alpha (generated from the logo's luminance),
-     so no blend-mode trickery is needed. Stacked shadows give it volume. */
-  filter:
-    drop-shadow(0 10px 14px rgba(91,58,128,.34))
-    drop-shadow(0 2px 0 rgba(164,94,229,.28))
-    drop-shadow(0 0 22px rgba(164,94,229,.18));
+  /* already a 3D render, so it just needs grounding and a glow */
+  filter:drop-shadow(0 14px 22px rgba(152,103,197,.55));
   animation:lampSway 5.5s ease-in-out infinite;
   transform-origin:58% 88%;
 }
@@ -286,12 +282,10 @@
 
 /* the little lamp that sits on an unrevealed image */
 .veil-lamp{
-  position:absolute;left:50%;top:50%;width:132px;height:auto;
+  position:absolute;left:50%;top:50%;width:150px;height:auto;
   transform:translate(-50%,-50%);
   z-index:5;pointer-events:none;
-  /* a cream-inked copy of the same artwork, so it glows on the purple smoke
-     without needing invert/screen */
-  filter:drop-shadow(0 0 16px rgba(255,255,255,.5)) drop-shadow(0 4px 10px rgba(0,0,0,.45));
+  filter:drop-shadow(0 14px 22px rgba(152,103,197,.6));
 }
 .veil-label{
   position:absolute;left:0;right:0;bottom:16px;z-index:5;text-align:center;
@@ -301,19 +295,21 @@
 }
 
 /* --- the rattle: lamp shakes hard just before it blows --- */
-.wish-shot.rattling .veil-lamp{animation:rattle .5s cubic-bezier(.36,.07,.19,.97)}
+.wish-shot.rattling .veil-lamp{animation:rattle 1.1s cubic-bezier(.36,.07,.19,.97)}
 /* translate(-50%,-50%) has to be carried through every frame, or the lamp
    jumps out of centre the moment the animation starts. */
+/* lifted from the Lovable build's lamp-shake, with the centring transform
+   carried through every frame so the lamp doesn't jump out of position */
 @keyframes rattle{
-  0%,100%{transform:translate(-50%,-50%) rotate(0)}
-  8%{transform:translate(calc(-50% - 3px),calc(-50% + 1px)) rotate(-7deg)}
-  18%{transform:translate(calc(-50% + 3px),calc(-50% - 2px)) rotate(7deg)}
-  28%{transform:translate(calc(-50% - 4px),calc(-50% + 2px)) rotate(-9deg) scale(1.04)}
-  38%{transform:translate(calc(-50% + 4px),calc(-50% - 1px)) rotate(9deg) scale(1.04)}
-  50%{transform:translate(calc(-50% - 5px),calc(-50% + 2px)) rotate(-11deg) scale(1.08)}
-  62%{transform:translate(calc(-50% + 5px),calc(-50% - 2px)) rotate(11deg) scale(1.08)}
-  74%{transform:translate(calc(-50% - 3px),calc(-50% + 1px)) rotate(-6deg) scale(1.12)}
-  88%{transform:translate(calc(-50% + 2px),-50%) rotate(4deg) scale(1.16)}
+  0%{transform:translate(-50%,-50%) rotate(0)}
+  10%{transform:translate(calc(-50% - 3px),-50%) rotate(-7deg)}
+  20%{transform:translate(calc(-50% + 3px),-50%) rotate(7deg)}
+  30%{transform:translate(calc(-50% - 4px),-50%) rotate(-9deg) scale(1.04)}
+  40%{transform:translate(calc(-50% + 4px),-50%) rotate(9deg) scale(1.06)}
+  50%{transform:translate(calc(-50% - 2px),-50%) rotate(-6deg) scale(1.1)}
+  58%{transform:translate(-50%,-50%) rotate(4deg) scale(1.14)}
+  70%{transform:translate(-50%,-50%) rotate(-2deg) scale(1)}
+  100%{transform:translate(-50%,-50%) rotate(0) scale(1)}
 }
 .wish-shot.rattling .veil{animation:veilTense .5s ease-in}
 @keyframes veilTense{
