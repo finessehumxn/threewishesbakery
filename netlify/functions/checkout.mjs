@@ -126,7 +126,15 @@ export default async (req) => {
       message: data?.error?.message,
       param: data?.error?.param,
     });
-    return new Response(JSON.stringify({ error: "stripe_error" }), { status: 502, headers });
+    // Return Stripe's type/code — these are safe, fixed identifiers like
+    // "invalid_request_error" / "api_key_expired". The message is NOT returned,
+    // because it can name account details.
+    return new Response(JSON.stringify({
+      error: "stripe_error",
+      type: data?.error?.type || null,
+      code: data?.error?.code || null,
+      param: data?.error?.param || null,
+    }), { status: 502, headers });
   }
   return new Response(JSON.stringify({ url: data.url }), { status: 200, headers });
 };

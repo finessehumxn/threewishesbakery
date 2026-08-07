@@ -204,6 +204,7 @@ function renderCart() {
 async function checkout() {
   const cart = loadCart();
   if (!cart.length) { toast("Your box is empty ✦"); return; }
+  let cardCheckoutFailed = false;
 
   // Preferred: live Stripe Checkout via serverless function (no product catalog needed)
   try {
@@ -221,8 +222,18 @@ async function checkout() {
     if (res.ok) {
       const data = await res.json();
       if (data && data.url) { window.location.href = data.url; return; }
+    } else {
+      // Card checkout is configured but Stripe refused. Say so out loud —
+      // silently dropping to a mailto: made the button look broken.
+      let detail = "";
+      try { const d = await res.json(); detail = d.code || d.type || ""; } catch {}
+      console.error("Card checkout unavailable:", res.status, detail);
+      cardCheckoutFailed = true;
     }
-  } catch (e) { /* fall through to backups */ }
+  } catch (e) {
+    console.error("Could not reach the checkout service:", e);
+    cardCheckoutFailed = true;
+  }
 
   // 1) Single item with its own Stripe Payment Link → straight to Stripe.
   if (cart.length === 1) {
@@ -234,7 +245,12 @@ async function checkout() {
   // 2) Main store Payment Link configured → straight to Stripe.
   if (STRIPE_CHECKOUT_LINK) { window.location.href = STRIPE_CHECKOUT_LINK; return; }
 
-  // 3) Last resort: compose an itemized order email.
+  // 3) Last resort: an itemized order email — but tell the customer that is
+  //    what is happening, and confirm it in the page in case no mail client
+  //    opens, which is the common case on phones.
+  if (cardCheckoutFailed) {
+    toast("Card checkout is down — sending your order by email instead");
+  }
   const subtotal = cart.reduce((s, l) => s + l.qty * l.price, 0);
   const lines = cart.map(l => `• ${l.name} — ${l.size} × ${l.qty} = ${money(l.price * l.qty)}`);
   const fulfillEl = document.getElementById("fulfillment");
@@ -259,8 +275,22 @@ async function checkout() {
     "",
     "Thank you!",
   ].join("\n");
-  window.location.href =
-    `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent("Three Wishes order ✦")}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent("Three Wishes order ✦")}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+
+  // If no mail client took over, the page is still here a moment later — so
+  // put the order somewhere the customer can actually copy it from.
+  setTimeout(() => {
+    const items = document.getElementById("cartItems");
+    if (!items || document.hidden) return;
+    items.insertAdjacentHTML("afterbegin",
+      '<div class="cart-fallback">' +
+      "<strong>Didn't your email open?</strong>" +
+      "<p>Card checkout is temporarily unavailable. Copy the order below and send it to " +
+      '<a href="mailto:' + ORDER_EMAIL + '">' + ORDER_EMAIL + "</a> and we'll confirm by reply.</p>" +
+      "<textarea readonly rows=\"9\">" + body.replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c])) + "</textarea>" +
+      "</div>");
+  }, 1200);
 }
 
 /* ---------- drawer / UI ---------- */
