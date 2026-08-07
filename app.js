@@ -355,11 +355,38 @@ function toast(msg) {
   toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
 }
 
-/* size selector on product cards */
+/* ---------- size selector + live price ---------- */
+/* Picking a size used to only move the aria-pressed flag, so the card kept
+   showing "from $15" whether you'd chosen 6 or a 24 Party Box. The chip now
+   shows the price of the size actually selected. */
+function priceForCard(cardEl) {
+  const p = PRODUCTS[cardEl.dataset.product];
+  if (!p) return null;
+  const pressed = cardEl.querySelector('.size-btn[aria-pressed="true"]');
+  const idx = pressed ? Number(pressed.dataset.sizeIndex) : 0;
+  return p.sizes[idx] || null;
+}
+
+function refreshCardPrice(cardEl) {
+  const size = priceForCard(cardEl);
+  const chip = cardEl.querySelector(".price-chip");
+  if (!size || !chip) return;
+  // whole dollars read better on a small chip: $15, not $15.00
+  chip.textContent = Number.isInteger(size.price) ? "$" + size.price : money(size.price);
+  chip.setAttribute("aria-label", `${size.label} — ${money(size.price)}`);
+}
+
 function selectSize(btn) {
   const row = btn.closest(".size-row");
   row.querySelectorAll(".size-btn").forEach(b => b.setAttribute("aria-pressed", "false"));
   btn.setAttribute("aria-pressed", "true");
+  refreshCardPrice(btn.closest(".card"));
+}
+
+/* Set every chip from PRODUCTS on load, so the markup can never drift out of
+   sync with the real prices — one source of truth. */
+function initCardPrices() {
+  document.querySelectorAll(".card[data-product]").forEach(refreshCardPrice);
 }
 function addFromCard(cardEl) {
   const key = cardEl.dataset.product;
@@ -416,6 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   // tapping a nav link closes the mobile menu (in-page anchors don't reload)
   document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", closeNav));
+  initCardPrices();
   renderCart();
 });
 
