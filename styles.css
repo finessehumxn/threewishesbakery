@@ -619,3 +619,6 @@ textarea{min-height:130px;resize:vertical}
    it's a <p> so it can't create an h1->h3 jump, styled to match the old h3. */
 .drawer-title{font-family:var(--font-display);font-weight:700;font-size:1.05rem}
 .recipe-title{font-family:var(--font-display);font-size:1.3rem}
+
+/* Wish Basket count, slightly de-emphasised beside the title */
+.basket-count{font-family:var(--font-mono);font-weight:400;font-size:.85rem;color:#c79bf0}

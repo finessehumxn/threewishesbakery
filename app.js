@@ -23,7 +23,7 @@ const STRIPE_CHECKOUT_LINK = "";
 
 const PRODUCTS = {
   classic: {
-    name: "The Classic Wish",
+    name: "The Three Wishes Classic",
     sizes: [
       { label: "6",  price: 15, stripeLink: "https://buy.stripe.com/fZu8wJaJV88edd4bLqeUU00" },
       { label: "12", price: 26, stripeLink: "" },
@@ -31,7 +31,7 @@ const PRODUCTS = {
     ],
   },
   cocoa: {
-    name: "Cozy Cocoa Wish",
+    name: "The Midnight Magic Wish",
     sizes: [
       { label: "6",  price: 15, stripeLink: "" },
       { label: "12", price: 26, stripeLink: "" },
@@ -39,7 +39,7 @@ const PRODUCTS = {
     ],
   },
   whitechip: {
-    name: "White Chip Wish",
+    name: "The Pearl Wish",
     sizes: [
       { label: "6",  price: 15, stripeLink: "" },
       { label: "12", price: 26, stripeLink: "" },
@@ -47,7 +47,7 @@ const PRODUCTS = {
     ],
   },
   pbsandwich: {
-    name: "PB Wish Sandwiches",
+    name: "The Peanut Butter Treasure",
     sizes: [
       { label: "6",  price: 15, stripeLink: "" },
       { label: "12", price: 26, stripeLink: "" },
@@ -70,7 +70,7 @@ const PRODUCTS = {
     ],
   },
   brownies: {
-    name: "Gooey Wish Brownies",
+    name: "The Fudgy Fortune Brownie",
     sizes: [
       { label: "6 brownies",  price: 18, stripeLink: "" },
       { label: "12 brownies", price: 32, stripeLink: "" },
@@ -85,7 +85,7 @@ const PRODUCTS = {
     ],
   },
   tangybars: {
-    name: "Tangy Wish Bars",
+    name: "The Citrus Spell",
     sizes: [
       { label: "6",  price: 18, stripeLink: "" },
       { label: "12", price: 32, stripeLink: "" },
@@ -144,7 +144,7 @@ function addToCart(productKey, sizeIndex) {
   else cart.push({ key: productKey, name: p.name, size: size.label, price: size.price, qty: 1 });
   saveCart(cart);
   renderCart();
-  toast(`${p.name} — wish granted ✦`);
+  toast(`✨ Wish added to your basket — ${p.name}`);
 }
 
 function changeQty(index, delta) {
@@ -177,7 +177,7 @@ function renderCart() {
 
   if (!cart.length) {
     itemsEl.innerHTML =
-      '<div class="cart-empty"><span class="emoji">🍪</span>Your box is empty.<br>Pick a cookie to make a wish.</div>';
+      '<div class="cart-empty"><span class="emoji">🧺</span><strong>Empty Wish Basket</strong><br>Your Wish Basket is waiting for a little magic.</div>';
   } else {
     itemsEl.innerHTML = cart.map((l, i) => `
       <div class="cart-line">
@@ -203,7 +203,7 @@ function renderCart() {
 /* ---------- checkout ---------- */
 async function checkout() {
   const cart = loadCart();
-  if (!cart.length) { toast("Your box is empty ✦"); return; }
+  if (!cart.length) { toast("Your Wish Basket is waiting for a little magic ✦"); return; }
   let cardCheckoutFailed = false;
 
   // Preferred: live Stripe Checkout via serverless function (no product catalog needed)

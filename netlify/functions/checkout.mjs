@@ -18,15 +18,15 @@ const FREE_SHIP_CENTS = 10000; // $100+
    If a key or size label doesn't appear here, the request is rejected.
    ------------------------------------------------------------------ */
 const CATALOG = {
-  classic: { name: "The Classic Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
-  cocoa: { name: "Cozy Cocoa Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
-  whitechip: { name: "White Chip Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
-  pbsandwich: { name: "PB Wish Sandwiches", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  classic: { name: "The Three Wishes Classic", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  cocoa: { name: "The Midnight Magic Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  whitechip: { name: "The Pearl Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  pbsandwich: { name: "The Peanut Butter Treasure", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
   variety: { name: "Baker's Variety Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
   doughsleeve: { name: "Take-&-Bake Cookie Dough", sizes: { "12 dough pucks": 2200, "24 dough pucks": 4000 } },
-  brownies: { name: "Gooey Wish Brownies", sizes: { "6 brownies": 1800, "12 brownies": 3200, "36-count party box": 7800 } },
+  brownies: { name: "The Fudgy Fortune Brownie", sizes: { "6 brownies": 1800, "12 brownies": 3200, "36-count party box": 7800 } },
   lemonloaf: { name: "Golden Lemon Bliss Loaf", sizes: { "Half loaf": 1400, "Full loaf": 2400 } },
-  tangybars: { name: "Tangy Wish Bars", sizes: { "6": 1800, "12": 3200 } },
+  tangybars: { name: "The Citrus Spell", sizes: { "6": 1800, "12": 3200 } },
   sourclassic: { name: "Classic Sourdough Loaf", sizes: { "Half loaf": 700, "Full loaf": 1200 } },
   sourbacon: { name: "Bacon & Cheddar Sourdough", sizes: { "Half loaf": 900, "Full loaf": 1600 } },
   sourseasonal: { name: "Patti's Mystery Loaf", sizes: { "Half loaf": 800, "Full loaf": 1400 } },
