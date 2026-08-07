@@ -124,27 +124,86 @@
      The hero lamp — an SVG genie lamp that breathes smoke, and
      puffs on demand when you rub it.
      ------------------------------------------------------------ */
-  const LAMP_SVG = `
-<svg class="lamp" viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Genie lamp">
-  <ellipse cx="68" cy="92" rx="42" ry="5" fill="rgba(20,10,10,.14)"/>
-  <!-- handle -->
-  <path d="M100 54c22-6 28 4 26 15-2 10-12 14-25 13" stroke="#d14d6b" stroke-width="8" stroke-linecap="round"/>
-  <path d="M100 54c22-6 28 4 26 15" stroke="#ff9db5" stroke-width="3" stroke-linecap="round"/>
+  /* A single lamp drawing, reused at three sizes: the hero centrepiece, the
+     marker on each unrevealed image, and anywhere else it's wanted.
+     Volume comes from layered gradients — a top highlight, a core shadow, a
+     reflected bounce along the bottom edge, plus a specular hotspot. `uid`
+     keeps the gradient ids unique so multiple lamps on one page don't
+     inherit each other's <defs>. */
+  function lampSVG(cls, uid) {
+    const g = n => `${n}-${uid}`;
+    return `
+<svg class="${cls}" viewBox="0 0 140 104" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Genie lamp">
+  <defs>
+    <radialGradient id="${g('body')}" cx="36%" cy="26%" r="82%">
+      <stop offset="0%" stop-color="#d9b3f2"/>
+      <stop offset="26%" stop-color="#a45ee5"/>
+      <stop offset="64%" stop-color="#7a45ad"/>
+      <stop offset="100%" stop-color="#3d2359"/>
+    </radialGradient>
+    <linearGradient id="${g('bounce')}" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#c58ff0" stop-opacity=".85"/>
+      <stop offset="100%" stop-color="#c58ff0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="${g('spout')}" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5b3a80"/>
+      <stop offset="45%" stop-color="#9867c5"/>
+      <stop offset="100%" stop-color="#c99cee"/>
+    </linearGradient>
+    <linearGradient id="${g('lid')}" x1="0" y1="1" x2=".4" y2="0">
+      <stop offset="0%" stop-color="#7a45ad"/>
+      <stop offset="55%" stop-color="#b478ea"/>
+      <stop offset="100%" stop-color="#e3c9f8"/>
+    </linearGradient>
+    <radialGradient id="${g('gem')}" cx="34%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#fff6d8"/>
+      <stop offset="45%" stop-color="#f5c451"/>
+      <stop offset="100%" stop-color="#b8862a"/>
+    </radialGradient>
+    <linearGradient id="${g('handle')}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b478ea"/>
+      <stop offset="60%" stop-color="#7a45ad"/>
+      <stop offset="100%" stop-color="#4a2c6b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- contact shadow grounds it -->
+  <ellipse cx="68" cy="96" rx="44" ry="6" fill="rgba(43,24,64,.32)"/>
+
+  <!-- handle, behind the body -->
+  <path d="M101 55c23-7 30 4 28 16-2 11-13 15-27 14" stroke="url(#${g('handle')})" stroke-width="9" stroke-linecap="round"/>
+  <path d="M103 57c17-5 23 2 22 11" stroke="#d9b3f2" stroke-width="2.5" stroke-linecap="round" opacity=".75"/>
+
   <!-- spout -->
-  <path d="M38 56 12 30l-6 7 24 27z" fill="#d14d6b"/>
-  <ellipse cx="10" cy="34" rx="6" ry="5" transform="rotate(-42 10 34)" fill="#a83853"/>
-  <!-- body -->
-  <ellipse cx="66" cy="63" rx="36" ry="21" fill="#d14d6b"/>
-  <path d="M30 63c0 12 16 21 36 21s36-9 36-21c0 0-8 14-36 14S30 63 30 63z" fill="#a83853"/>
-  <ellipse cx="52" cy="54" rx="14" ry="6" transform="rotate(-16 52 54)" fill="rgba(255,255,255,.5)"/>
-  <!-- lid + knob -->
-  <path d="M47 46c4-11 11-16 19-16s15 5 19 16z" fill="#ff85a1"/>
-  <ellipse cx="66" cy="46" rx="20" ry="4" fill="#a83853"/>
-  <circle cx="66" cy="25" r="6" fill="#f5c451"/>
-  <circle cx="64" cy="23" r="2" fill="#fff0c9"/>
-  <!-- base -->
-  <path d="M44 82h44l6 8H38z" fill="#a83853"/>
+  <path d="M38 57 12 29l-7 8 25 28z" fill="url(#${g('spout')})"/>
+  <path d="M14 31 8 38l3 3 6-7z" fill="#e3c9f8" opacity=".55"/>
+  <ellipse cx="10" cy="33" rx="6.5" ry="5" transform="rotate(-42 10 33)" fill="#2b1840"/>
+  <ellipse cx="10" cy="33" rx="4" ry="2.8" transform="rotate(-42 10 33)" fill="#150b20"/>
+
+  <!-- body: base gradient, core shadow, reflected bounce, specular -->
+  <ellipse cx="67" cy="64" rx="37" ry="22" fill="url(#${g('body')})"/>
+  <path d="M30 64c0 13 17 22 37 22s37-9 37-22c0 0-9 15-37 15S30 64 30 64z" fill="#3d2359" opacity=".55"/>
+  <path d="M34 74c7 8 19 12 33 12s26-4 33-12c-6 11-19 17-33 17s-27-6-33-17z" fill="url(#${g('bounce')})"/>
+  <ellipse cx="51" cy="54" rx="15" ry="6.5" transform="rotate(-17 51 54)" fill="#fff" opacity=".42"/>
+  <ellipse cx="45" cy="51" rx="6" ry="2.6" transform="rotate(-20 45 51)" fill="#fff" opacity=".75"/>
+
+  <!-- lid -->
+  <path d="M47 46c4-12 11-17 20-17s16 5 20 17z" fill="url(#${g('lid')})"/>
+  <ellipse cx="67" cy="46" rx="21" ry="4.5" fill="#4a2c6b"/>
+  <path d="M56 34c2-3 6-5 10-5" stroke="#f0dffa" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+
+  <!-- gem -->
+  <circle cx="67" cy="24" r="6.5" fill="url(#${g('gem')})"/>
+  <circle cx="65" cy="22" r="2" fill="#fffdf2"/>
+
+  <!-- foot -->
+  <path d="M45 84h44l7 9H38z" fill="#4a2c6b"/>
+  <path d="M45 84h44l1 2H44z" fill="#b478ea" opacity=".5"/>
 </svg>`;
+  }
+
+  let lampUid = 0;
+  const LAMP_SVG = lampSVG("lamp", "hero");
 
   function mountLamp() {
     // sits in the hero's text column, just under the CTAs — .hero-photo
@@ -246,6 +305,82 @@
      Boot.
      ------------------------------------------------------------ */
   /* ------------------------------------------------------------
+     THE WISH REVEAL
+     Each product photo starts behind an opaque iris smoke curtain.
+     When it scrolls in: the lamp rattles, then the smoke blasts
+     out with a flash and shockwave and the photo is exposed.
+
+     The curtain is built here in JS and never lives in the HTML —
+     if this script fails to run, every photo is simply visible.
+     A shop must not hide its products behind an animation.
+     ------------------------------------------------------------ */
+  function mountWishReveals() {
+    if (!on() || !("IntersectionObserver" in window)) return;
+
+    const shots = document.querySelectorAll(".card-photo:not(.mystery-photo), .drop-tile");
+    if (!shots.length) return;
+
+    shots.forEach(shot => {
+      shot.classList.add("wish-shot");
+      shot.insertAdjacentHTML(
+        "beforeend",
+        '<i class="veil"></i>' +
+          lampSVG("veil-lamp", "v" + lampUid++) +
+          '<span class="veil-label">make a wish ✦</span>' +
+          '<i class="pow-flash"></i><i class="pow-ring"></i>' +
+          '<span class="granted-tag">✦ wish granted ✦</span>'
+      );
+    });
+
+    const grant = shot => {
+      if (shot.dataset.granted) return;
+      shot.dataset.granted = "1";
+
+      // 1. the lamp rattles, building tension
+      shot.classList.add("rattling");
+
+      // 2. then it blows — flash, shockwave, smoke out, photo exposed
+      setTimeout(() => {
+        shot.classList.remove("rattling");
+        shot.classList.add("blown");
+
+        const r = shot.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        // heavy smoke bursting off the image, plus a gold spark shower
+        poof(cx, cy, {
+          count: coarse.matches ? 12 : 20,
+          rise: Math.max(140, r.height * 0.9),
+          spread: Math.max(120, r.width * 0.55),
+          sparks: 14,
+        });
+      }, 500);
+    };
+
+    const io = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          grant(e.target);
+          io.unobserve(e.target);
+        });
+      },
+      { rootMargin: "0px 0px -18% 0px", threshold: 0.45 }
+    );
+    shots.forEach(s => io.observe(s));
+
+    // Failsafe: never leave a product photo behind a curtain.
+    setTimeout(() => {
+      shots.forEach(s => {
+        if (s.dataset.granted) return;
+        s.dataset.granted = "1";
+        s.classList.add("blown");
+      });
+      io.disconnect();
+    }, 9000);
+  }
+
+  /* ------------------------------------------------------------
      Cursor sparkle trail — desktop only, throttled to one spark
      every ~60ms so it reads as a trail, not a particle storm.
      ------------------------------------------------------------ */
@@ -278,6 +413,7 @@
   function init() {
     mountFog();
     mountReveals();
+    mountWishReveals();
     mountWishForm();
     mountLamp();      // the lamp is part of the brand, not just an animation —
                       // it mounts even under reduced motion, it just holds still

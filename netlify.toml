@@ -5,8 +5,11 @@
 # This is what lets the site be deployed by linking the Git repo instead of
 # drag-and-dropping a folder.
 
+# No `command` key on purpose. This site is already HTML — there is nothing to
+# compile. Declaring even an empty build command gives Netlify a script that can
+# exit non-zero and fail the deploy; omitting it means no build stage runs at all.
+# Works identically for a drag-and-drop deploy and a Git-linked one.
 [build]
-  command = ""
   publish = "."
 
 [functions]
