@@ -27,8 +27,8 @@
 
   --rose:#a45ee5;
   --rose-deep:#9867c5;
-  --cream:#0f0818;       /* now the PAGE colour — dark */
-  --ink:#f7f2fd;         /* and this is the text */
+  --cream:#f7f2fd;       /* light — as the name says. Text and light surfaces. */
+  --ink:#f7f2fd;         /* alias, same value */
   --dough:#2a1b3f;       /* dark surface / borders */
   --cocoa:#f7f2fd;       /* "hard edge" colour, now light on dark */
   --surface:#1a0f2b;     /* raised card background */
@@ -53,7 +53,7 @@ body{
   overflow-x:clip;
   font-family:var(--font-body);
   background:var(--midnight);
-  color:var(--ink);
+  color:var(--cream);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
@@ -65,10 +65,11 @@ button{font-family:inherit;cursor:pointer}
   font-family:var(--font-mono);
   font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
   /* #d14d6b on cream measured 3.84:1; #6b3f9e clears AA for small text */
-  color:var(--amethyst);display:inline-block;margin-bottom:14px;
+  color:#c79bf0;display:inline-block;margin-bottom:14px;   /* amethyst itself is 3.59 on midnight */
 }
 h1,h2{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-spacing:-.01em}
-.serif-accent{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--gold-bright)}
+/* #e8b84b on the midnight page is 3.53:1; #f0cd72 clears AA and keeps the gold */
+.serif-accent{font-family:var(--font-serif);font-style:italic;font-weight:600;color:#f0cd72}
 
 /* ---------- announcement bar ---------- */
 .announce{
@@ -88,7 +89,8 @@ h1,h2{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-sp
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand-mark{
   width:42px;height:42px;border-radius:50%;
-  background:var(--rose);color:var(--white);
+  /* white on iris is 4.13:1; #6b3f9e clears AA for the fallback glyph */
+  background:#6b3f9e;color:#fff;
   display:grid;place-items:center;
   font-family:var(--font-display);font-weight:700;font-size:1rem;
   box-shadow:var(--shadow-pop);
@@ -237,7 +239,7 @@ body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-4
 .card-body p{font-size:.92rem;color:#c3b3d8;flex:1}
 .size-row{display:flex;gap:8px;flex-wrap:wrap}
 .size-btn{
-  border:2px solid var(--cocoa);background:var(--cream);border-radius:999px;
+  border:2px solid var(--iris);background:transparent;color:var(--cream);border-radius:999px;
   padding:5px 13px;font-size:.75rem;font-weight:700;font-family:var(--font-mono);
 }
 .size-btn[aria-pressed="true"]{background:var(--ink);color:var(--midnight);border-color:var(--ink)}
@@ -255,7 +257,7 @@ body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-4
   border:3px solid var(--rose);
 }
 .minis h2{font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--white)}
-.minis .serif-accent{color:var(--rose)}
+.minis .serif-accent{color:#f0cd72}
 .minis ul{list-style:none;margin-top:18px;display:grid;gap:8px;font-family:var(--font-mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
 .minis ul li::before{content:"✦ ";color:var(--rose)}
 @media (max-width:820px){.minis{grid-template-columns:1fr}}
@@ -364,7 +366,7 @@ textarea{min-height:130px;resize:vertical}
 /* toast */
 .toast{
   position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
-  background:var(--cocoa);color:var(--cream);border:2px solid var(--rose);
+  background:#160c26;color:var(--cream);border:2px solid var(--amethyst);
   border-radius:999px;padding:10px 22px;font-weight:700;font-size:.88rem;
   opacity:0;pointer-events:none;transition:.25s;z-index:120;
 }
@@ -444,12 +446,12 @@ textarea{min-height:130px;resize:vertical}
 .mystery-photo{
   display:grid;place-items:center;
   background:
-    radial-gradient(circle at 30% 25%, rgba(164,94,229,.35), transparent 45%),
-    radial-gradient(circle at 75% 70%, rgba(209,77,107,.4), transparent 50%),
-    var(--cocoa);
+    radial-gradient(circle at 30% 25%, rgba(164,94,229,.4), transparent 45%),
+    radial-gradient(circle at 75% 70%, rgba(152,103,197,.45), transparent 50%),
+    #160c26;   /* was var(--cocoa), which is light in this theme */
 }
 .mystery-mark{
-  font-family:var(--font-display);font-size:6rem;font-weight:700;color:var(--rose);
+  font-family:var(--font-display);font-size:6rem;font-weight:700;color:#d3b0f5;
   text-shadow:0 6px 0 var(--rose-deep);
   animation:mysteryBob 3s ease-in-out infinite;
 }
@@ -500,7 +502,7 @@ textarea{min-height:130px;resize:vertical}
 .article-body ol li::before{
   content:counter(step);position:absolute;left:0;top:2px;
   font-family:var(--font-mono);font-size:.78rem;font-weight:700;
-  background:var(--cocoa);color:var(--cream);border-radius:50%;
+  background:#160c26;color:var(--cream);border-radius:50%;
   width:26px;height:26px;display:grid;place-items:center;
 }
 .pull{
@@ -508,7 +510,8 @@ textarea{min-height:130px;resize:vertical}
   border-radius:0 var(--radius) var(--radius) 0;
   padding:22px 26px;margin:30px 0;
   font-family:var(--font-serif);font-style:italic;font-size:1.2rem;
-  color:var(--rose-deep);line-height:1.5;
+  /* light panel, so the quote needs dark text — iris on it was 3.75:1 */
+  color:#4b2872;line-height:1.5;
 }
 .note-box{
   background:var(--white);border:2px dashed var(--rose-deep);
@@ -526,9 +529,10 @@ textarea{min-height:130px;resize:vertical}
 }
 .spec dt{
   font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--rose-deep);margin-bottom:4px;
+  /* iris on the raised surface was 4.43:1 — a hair under */
+  text-transform:uppercase;color:#c79bf0;margin-bottom:4px;
 }
-.spec dd{font-family:var(--font-display);font-weight:600;font-size:1.02rem}
+.spec dd{font-family:var(--font-display);font-weight:600;font-size:1.02rem;color:var(--cream)}
 .article-foot{
   margin-top:48px;padding-top:28px;border-top:2px solid var(--dough);
   display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;
@@ -585,3 +589,15 @@ textarea{min-height:130px;resize:vertical}
   background:#fff3bf;color:#5a4300;padding:1px 5px;border-radius:4px;
   font-weight:600;box-decoration-break:clone;
 }
+
+
+/* ---------- light panels on a dark page ---------- */
+/* The allergy notice and policy note-boxes are deliberately light panels, so
+   their text has to be dark — inheriting the page's light body colour made
+   them measure 1.00:1 (invisible). */
+.note-box{background:#f7f2fd;color:#1a0f2b;border-color:var(--iris)}
+.note-box h3,.note-box strong{color:#1a0f2b}
+.note-box a{color:#6b3f9e}
+.allergy-panel{background:#f7f2fd;color:#1a0f2b}
+.allergy-panel strong{color:#1a0f2b}
+.allergy-panel .eyebrow{color:#6b3f9e}

@@ -107,7 +107,8 @@
   position:absolute;left:0;bottom:-6px;white-space:nowrap;
   font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;
   /* 3.84:1 -> AA at this size */
-  text-transform:uppercase;color:#6b3f9e;font-weight:700;
+  /* #6b3f9e measured 2.65:1 on the midnight page */
+  text-transform:uppercase;color:#c79bf0;font-weight:700;
   animation:hintFade 3.4s ease-in-out infinite;
 }
 @keyframes hintFade{0%,100%{opacity:.4}50%{opacity:1}}

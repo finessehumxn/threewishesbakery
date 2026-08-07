@@ -257,11 +257,13 @@
   function mountWishReveals() {
     if (!on() || !("IntersectionObserver" in window)) return;
 
-    // Deliberately NOT .card-photo. Covering a menu photo in opaque smoke
-    // hides the product at the exact moment someone is deciding whether to
-    // buy it — a food shop has to show the food. The reveal runs on the
-    // gallery, where the delight costs nothing.
-    const shots = document.querySelectorAll(".drop-tile");
+    /* Every product image and every gallery tile, matching the Lovable build
+       where each ProductCard is wrapped in <GenieReveal delay={index*140}>.
+       I had previously limited this to the gallery on the argument that a food
+       shop shouldn't hide its food; that was overruled — it's the point of
+       the design. The reveal is quick and the safety sweep below guarantees
+       nothing stays covered. */
+    const shots = document.querySelectorAll(".card-photo:not(.mystery-photo), .drop-tile");
     if (!shots.length) return;
 
     shots.forEach(shot => {
@@ -276,9 +278,25 @@
       );
     });
 
+    /* replayOnHover — hovering an already-granted image bursts it again,
+       as the Lovable component does by default. */
+    const replay = shot => {
+      if (!on() || shot.dataset.replaying) return;
+      shot.dataset.replaying = "1";
+      const r = shot.getBoundingClientRect();
+      poof(r.left + r.width / 2, r.top + r.height / 2, {
+        count: coarse.matches ? 8 : 13,
+        rise: Math.max(120, r.height * 0.7),
+        spread: Math.max(100, r.width * 0.45),
+        sparks: 9,
+      });
+      setTimeout(() => delete shot.dataset.replaying, 900);
+    };
+
     const grant = shot => {
       if (shot.dataset.granted) return;
       shot.dataset.granted = "1";
+      shot.addEventListener("mouseenter", () => replay(shot));
 
       // 1. the lamp rattles, building tension
       shot.classList.add("rattling");
@@ -310,7 +328,7 @@
         const arriving = entries.filter(e => e.isIntersecting).map(e => e.target);
         arriving.forEach((el, i) => {
           io.unobserve(el);
-          setTimeout(() => grant(el), i * 220);
+          setTimeout(() => grant(el), i * 140);
         });
       },
       { rootMargin: "-38% 0px -38% 0px", threshold: 0 }
