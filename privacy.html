@@ -22,6 +22,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="magic.css">
+<!-- Plausible: cookieless, no personal data, no cross-site tracking.
+     Chosen over Google Analytics deliberately — GA would make the privacy
+     policy's "no third-party trackers" claim false and pull the site into
+     consent-banner territory. Loads deferred so it never blocks rendering.
+     Collects nothing until the 3wishesbakery.com site is created in Plausible. -->
+<script defer data-domain="3wishesbakery.com" src="https://plausible.io/js/script.outbound-links.js"></script>
 </head>
 <body>
 
@@ -69,15 +75,26 @@
 <h2>What we don't do</h2>
 <ul>
 <li>We do not sell or rent your information. Not to anyone, not ever.</li>
-<li>We do not run advertising trackers or third-party analytics on this site.</li>
+<li>We do not run advertising trackers, and nothing here follows you to other websites.</li>
 <li>We do not use your details for marketing unless you ask us to.</li>
 </ul>
+
+<h2>How we count visits</h2>
+<p>We use <a href="https://plausible.io/privacy-focused-web-analytics" rel="noopener">Plausible Analytics</a> to see how many people visit and which pages they read. It is deliberately chosen because of what it does <em>not</em> do:</p>
+<ul>
+<li>No cookies, and nothing stored on your device.</li>
+<li>No personal information, and no attempt to identify you.</li>
+<li>No profile that follows you to other websites.</li>
+<li>Data is aggregated and held in the EU. It is never sold or shared.</li>
+</ul>
+<p>That is why this site has no cookie banner — there is nothing to consent to. If you use a tracker blocker, blocking it changes nothing about your order.</p>
 
 <h2>Who we share it with</h2>
 <p>Only the services needed to actually get you cookies:</p>
 <ul>
 <li><strong>Stripe</strong> — payment processing</li>
 <li><strong>Netlify</strong> — hosting and form submissions</li>
+<li><strong>Plausible</strong> — anonymous, aggregated visit counts</li>
 <li><strong>Our shipping carrier</strong> — your address, to deliver the box</li>
 </ul>
 
@@ -94,7 +111,8 @@
 <p>If this policy changes we will update the date at the top of this page.</p>
 
 <h2>Contact</h2>
-<p><a href="mailto:hello@3wishesbakery.com">hello@3wishesbakery.com</a></p>
+<p>Three Wishes Bakery · Technology Dr, Palm Desert, CA<br>
+<a href="tel:+16028000660">(602) 800-0660</a> · <a href="mailto:hello@3wishesbakery.com">hello@3wishesbakery.com</a></p>
 
   </div>
 </article>
