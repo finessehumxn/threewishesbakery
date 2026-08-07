@@ -14,7 +14,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Article","headline":"Keeping cookies fresh (for real)","description":"Airtight, cool, and one weird trick with a slice of bread.","image":"extra-double-tray.jpg","author":{"@type":"Person","name":"Nurse Jeanie"},"publisher":{"@type":"Organization","name":"Three Wishes Bakery","logo":{"@type":"ImageObject","url":"logo-pink.jpg"}},"articleSection":"Nurse's tip"}
 </script>
-<link rel="icon" href="favicon.ico">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="icon" href="favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -116,14 +118,14 @@
 <footer class="site-footer">
   <div class="container footer-note" style="margin-top:0;border-top:none">
     <span>© 2026 Three Wishes Bakery ✦ Jeanie &amp; Patti</span>
-    <span>Baked with heart in California</span>
+    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a></span>
     <span>Site crafted by <a href="https://millennialscreatives.com" target="_blank" rel="noopener" style="color:var(--rose);font-weight:700">Millennials Creatives LLC</a> ✦</span>
   </div>
 </footer>
 
 <!-- CART DRAWER -->
 <div class="drawer-backdrop" onclick="closeCart()"></div>
-<aside class="drawer" aria-label="Shopping cart">
+<aside class="drawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
   <div class="drawer-head">
     <h3>Your box · Cart (<span data-cart-count>0</span>)</h3>
     <button class="drawer-close" onclick="closeCart()" aria-label="Close cart">✕</button>

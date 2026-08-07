@@ -317,7 +317,11 @@
   function mountWishReveals() {
     if (!on() || !("IntersectionObserver" in window)) return;
 
-    const shots = document.querySelectorAll(".card-photo:not(.mystery-photo), .drop-tile");
+    // Deliberately NOT .card-photo. Covering a menu photo in opaque smoke
+    // hides the product at the exact moment someone is deciding whether to
+    // buy it — a food shop has to show the food. The reveal runs on the
+    // gallery, where the delight costs nothing.
+    const shots = document.querySelectorAll(".drop-tile");
     if (!shots.length) return;
 
     shots.forEach(shot => {

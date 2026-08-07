@@ -5,6 +5,35 @@
 
 const FREE_SHIP_CENTS = 10000; // $100+
 
+/* ------------------------------------------------------------------
+   AUTHORITATIVE PRICE LIST — prices in cents.
+
+   This exists because the browser cannot be trusted. The previous
+   version read `it.price` straight out of the request body, so anyone
+   could POST a 50-cent price for a $78 party box and Stripe would
+   honour it. The client now sends only WHAT and HOW MANY; every
+   amount charged is looked up here.
+
+   Keep in sync with PRODUCTS in app.js (app.js drives display only).
+   If a key or size label doesn't appear here, the request is rejected.
+   ------------------------------------------------------------------ */
+const CATALOG = {
+  classic: { name: "The Classic Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  cocoa: { name: "Cozy Cocoa Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  whitechip: { name: "White Chip Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  pbsandwich: { name: "PB Wish Sandwiches", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  variety: { name: "Baker's Variety Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
+  doughsleeve: { name: "Take-&-Bake Cookie Dough", sizes: { "12 dough pucks": 2200, "24 dough pucks": 4000 } },
+  brownies: { name: "Gooey Wish Brownies", sizes: { "6 brownies": 1800, "12 brownies": 3200, "36-count party box": 7800 } },
+  lemonloaf: { name: "Golden Lemon Bliss Loaf", sizes: { "Half loaf": 1400, "Full loaf": 2400 } },
+  tangybars: { name: "Tangy Wish Bars", sizes: { "6": 1800, "12": 3200 } },
+  sourclassic: { name: "Classic Sourdough Loaf", sizes: { "Half loaf": 700, "Full loaf": 1200 } },
+  sourbacon: { name: "Bacon & Cheddar Sourdough", sizes: { "Half loaf": 900, "Full loaf": 1600 } },
+  sourseasonal: { name: "Patti's Mystery Loaf", sizes: { "Half loaf": 800, "Full loaf": 1400 } },
+  minibox: { name: "36-Count Mini Box", sizes: { "36 minis": 3600 } },
+};
+
+
 export default async (req) => {
   const headers = { "Content-Type": "application/json" };
   if (req.method !== "POST") {
@@ -35,17 +64,35 @@ export default async (req) => {
   params.set("phone_number_collection[enabled]", "true");
 
   let subtotal = 0;
-  items.forEach((it, i) => {
-    const name = String(it.name || "Treat").slice(0, 120);
+  const rejected = [];
+  let line = 0;
+
+  for (const it of items) {
+    // Look the price up. Never read one from the request.
+    const product = CATALOG[String(it.key || "")];
     const size = String(it.size || "").slice(0, 60);
+    const cents = product ? product.sizes[size] : undefined;
+
+    if (!product || typeof cents !== "number") {
+      rejected.push({ key: it.key, size });
+      continue;
+    }
+
     const qty = Math.min(Math.max(parseInt(it.qty, 10) || 1, 1), 50);
-    const cents = Math.min(Math.max(Math.round(Number(it.price) * 100) || 0, 50), 50000);
     subtotal += cents * qty;
-    params.set(`line_items[${i}][quantity]`, String(qty));
-    params.set(`line_items[${i}][price_data][currency]`, "usd");
-    params.set(`line_items[${i}][price_data][unit_amount]`, String(cents));
-    params.set(`line_items[${i}][price_data][product_data][name]`, size ? `${name} — ${size}` : name);
-  });
+    params.set(`line_items[${line}][quantity]`, String(qty));
+    params.set(`line_items[${line}][price_data][currency]`, "usd");
+    params.set(`line_items[${line}][price_data][unit_amount]`, String(cents));
+    params.set(`line_items[${line}][price_data][product_data][name]`, `${product.name} — ${size}`);
+    line++;
+  }
+
+  if (rejected.length) {
+    console.error("Rejected unknown catalog items:", rejected);
+  }
+  if (!line) {
+    return new Response(JSON.stringify({ error: "no_valid_items" }), { status: 400, headers });
+  }
 
   // Shipping option based on fulfillment + free-shipping threshold
   const shipCents = parseInt(process.env.SHIP_RATE_CENTS || "1500", 10);

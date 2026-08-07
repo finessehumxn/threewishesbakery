@@ -38,7 +38,8 @@ button{font-family:inherit;cursor:pointer}
 .eyebrow{
   font-family:var(--font-mono);
   font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--rose-deep);display:inline-block;margin-bottom:14px;
+  /* #d14d6b on cream measured 3.84:1; #a83a56 clears AA for small text */
+  color:#a83a56;display:inline-block;margin-bottom:14px;
 }
 h1,h2{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-spacing:-.01em}
 .serif-accent{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--rose-deep)}
@@ -190,9 +191,11 @@ body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-4
 .card-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .card:hover .card-photo img{transform:scale(1.06)}
 .tag{
-  position:absolute;left:14px;top:14px;background:var(--rose);color:var(--white);
+  position:absolute;left:14px;top:14px;
+  /* 2.30:1 at 9.9px originally; rose-deep only reached 4.21 . */
+  background:#c04360;color:var(--white);
   border-radius:999px;padding:5px 13px;font-size:.62rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.12em;box-shadow:0 3px 0 0 var(--rose-deep);
+  text-transform:uppercase;letter-spacing:.12em;box-shadow:0 3px 0 0 #9c3550;
 }
 .price-chip{
   position:absolute;right:14px;top:14px;background:var(--white);border:2px solid var(--cocoa);
@@ -279,9 +282,17 @@ body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-4
 .drawer{
   position:fixed;top:0;right:0;height:100%;width:min(420px,100%);z-index:100;
   background:var(--cream);border-left:3px solid var(--cocoa);
-  transform:translateX(102%);transition:transform .25s;display:flex;flex-direction:column;
+  transform:translateX(102%);display:flex;flex-direction:column;
+  /* A closed drawer was still visibility:visible, leaving 3 controls in the
+     tab order for keyboard and screen-reader users. It is now genuinely
+     inert until opened. */
+  /* Delay hiding until the slide-out finishes, but become visible instantly on
+     open — otherwise focus() fires while the drawer is still inert and silently
+     fails, leaving keyboard users stranded on the page behind it. */
+  visibility:hidden;
+  transition:transform .25s,visibility 0s linear .25s;
 }
-body.cart-open .drawer{transform:none}
+body.cart-open .drawer{transform:none;visibility:visible;transition:transform .25s,visibility 0s}
 body.cart-open .drawer-backdrop{opacity:1;pointer-events:auto}
 .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:2px solid var(--dough)}
 .drawer-head h3{font-family:var(--font-display)}
@@ -388,12 +399,14 @@ textarea{min-height:130px;resize:vertical}
 /* ---------- weekly drop bar ---------- */
 .drop-bar{
   display:block;text-align:center;text-decoration:none;
-  background:var(--rose);color:var(--white);font-weight:700;
+  /* white on #ff85a1 measured 2.30:1 at 11.5px; rose-deep only reached 4.21.
+     #c04360 computes to ~4.98 against white, clearing AA with margin. */
+  background:#c04360;color:var(--white);font-weight:700;
   font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;
   padding:10px 16px;border-bottom:3px solid var(--rose-deep);
   animation:dropGlow 3s ease-in-out infinite;
 }
-.drop-bar:hover{background:var(--rose-deep)}
+.drop-bar:hover{background:#b03f5c}
 @keyframes dropGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
 
 /* ---------- mystery loaf card ---------- */
@@ -534,4 +547,10 @@ textarea{min-height:130px;resize:vertical}
   }
   .drops::-webkit-scrollbar{display:none}
   .drop-tile{flex:0 0 62%;scroll-snap-align:start}
+}
+
+/* policy pages: highlight the facts that still need confirming */
+.article-body mark{
+  background:#fff3bf;color:#5a4300;padding:1px 5px;border-radius:4px;
+  font-weight:600;box-decoration-break:clone;
 }

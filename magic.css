@@ -104,7 +104,8 @@
 .lamp-hint{
   position:absolute;left:216px;bottom:34px;white-space:nowrap;
   font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--rose-deep);font-weight:700;
+  /* 3.84:1 -> AA at this size */
+  text-transform:uppercase;color:#a83a56;font-weight:700;
   animation:hintFade 3.4s ease-in-out infinite;
 }
 @keyframes hintFade{0%,100%{opacity:.4}50%{opacity:1}}

@@ -34,7 +34,9 @@
   "keywords": "nurse owned bakery, twin owned, Black owned, woman owned, cookies shipped nationwide"
 }
 </script>
-<link rel="icon" href="favicon.ico">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="icon" href="favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -412,7 +414,7 @@
       <p>We’re Jeanie and Patti — identical twins, BSN nurses, and the sisters behind Three Wishes. We spend our days caring for patients and our nights preheating ovens.</p>
       <p>Three Wishes began with founder <strong>Jeanie</strong>’s name and a promise we still keep: every box should feel like a wish granted.</p>
       <p><strong>Jeanie, founder,</strong> runs the cookies and bars — the close-your-eyes-on-the-first-bite kind. <strong>Patti, co-founder,</strong> is the bread half: one long-fermented sourdough bake a month, made the way bread used to be made.</p>
-      <p>For years we’ve been the ones baking for our own units and workplaces — hospital teams, office celebrations, organizations like Planned Parenthood. Now the same recipes ship to your door.</p>
+      <p>For years we’ve been the ones baking for our own units and workplaces — hospital teams, office celebrations, community organizations. Now the same recipes ship to your door.</p>
       <div class="badge-row" style="justify-content:flex-start;margin:18px 0 24px">
         <span class="badge">Twin BSN Nurses</span>
         <span class="badge">Nurse-Owned</span>
@@ -541,7 +543,9 @@
         <li>Winner gets the wished treat free</li>
       </ul>
     </div>
-    <form onsubmit="sendWishes(event)" style="display:grid;gap:12px">
+    <form name="wishes" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/form-thanks.html" style="display:grid;gap:12px">
+      <input type="hidden" name="form-name" value="wishes">
+      <p hidden><label>Leave blank: <input name="bot-field"></label></p>
       <input name="wname" required placeholder="Your name" aria-label="Your name">
       <input name="wemail" type="email" required placeholder="Your email" aria-label="Your email">
       <div class="wish-field"><input name="wish1" required placeholder="Wish #1 ✦" aria-label="Wish 1"></div>
@@ -560,7 +564,7 @@
     <a class="btn btn-ghost" href="#menu">Place an order →</a>
     &nbsp;
     <a class="btn btn-ghost" href="catering.html">Catering inquiries</a>
-    <p style="margin-top:18px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em">TRUSTED BY OUR OWN WORKPLACES ✦ HOSPITAL TEAMS ✦ ORGANIZATIONS LIKE PLANNED PARENTHOOD</p>
+    <p style="margin-top:18px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em">TRUSTED BY OUR OWN WORKPLACES ✦ HOSPITAL TEAMS ✦ COMMUNITY ORGANIZATIONS</p>
   </div>
 </section>
 
@@ -605,18 +609,24 @@
         <li><a href="https://instagram.com" rel="noopener">Instagram</a></li>
         <li><a href="https://tiktok.com" rel="noopener">TikTok</a></li>
       </ul>
+      <h4 style="margin-top:22px">The small print</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="terms.html">Terms of sale</a></li>
+        <li><a href="refunds.html">Refunds &amp; returns</a></li>
+      </ul>
     </div>
   </div>
   <div class="container footer-note">
     <span>© 2026 Three Wishes Bakery ✦ Jeanie &amp; Patti</span>
-    <span>Baked with heart in California</span>
+    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a></span>
     <span>Site crafted by <a href="https://millennialscreatives.com" target="_blank" rel="noopener" style="color:var(--rose);font-weight:700">Millennials Creatives LLC</a> ✦</span>
   </div>
 </footer>
 
 <!-- CART DRAWER -->
 <div class="drawer-backdrop" onclick="closeCart()"></div>
-<aside class="drawer" aria-label="Shopping cart">
+<aside class="drawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
   <div class="drawer-head">
     <h3>Your box · Cart (<span data-cart-count>0</span>)</h3>
     <button class="drawer-close" onclick="closeCart()" aria-label="Close cart">✕</button>

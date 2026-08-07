@@ -212,7 +212,9 @@ async function checkout() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        items: cart.map(l => ({ name: l.name, size: l.size, price: l.price, qty: l.qty })),
+        // Only what and how many. The price is looked up server-side in
+        // netlify/functions/checkout.mjs — anything sent from here is ignored.
+        items: cart.map(l => ({ key: l.key, size: l.size, qty: l.qty })),
         fulfillment: fulfillEl ? fulfillEl.value : "Ship nationwide",
       }),
     });
@@ -262,8 +264,42 @@ async function checkout() {
 }
 
 /* ---------- drawer / UI ---------- */
-function openCart() { closeNav(); document.body.classList.add("cart-open"); }
-function closeCart() { document.body.classList.remove("cart-open"); }
+/* The cart is a modal dialog, so it has to behave like one: focus moves in,
+   Tab is trapped inside while it's open, and focus returns to whatever
+   opened it. Previously focus stayed on the page behind it. */
+let cartOpener = null;
+
+function openCart() {
+  closeNav();
+  cartOpener = document.activeElement;
+  document.body.classList.add("cart-open");
+  const drawer = document.querySelector(".drawer");
+  if (!drawer) return;
+  const first = drawer.querySelector(".drawer-close");
+  if (first) first.focus();
+}
+
+function closeCart() {
+  const wasOpen = document.body.classList.contains("cart-open");
+  document.body.classList.remove("cart-open");
+  if (wasOpen && cartOpener && typeof cartOpener.focus === "function") {
+    cartOpener.focus();
+  }
+  cartOpener = null;
+}
+
+/* Trap Tab inside the drawer while it's open. */
+document.addEventListener("keydown", e => {
+  if (e.key !== "Tab" || !document.body.classList.contains("cart-open")) return;
+  const drawer = document.querySelector(".drawer");
+  if (!drawer) return;
+  const focusable = [...drawer.querySelectorAll('button, select, a[href], input, [tabindex]:not([tabindex="-1"])')]
+    .filter(el => !el.disabled && el.offsetParent !== null);
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
 
 /* ---------- mobile nav ---------- */
 function setNav(open) {
