@@ -13,7 +13,7 @@ const CATALOG = [
   { name: "White Chip Wish", img: "real-white-chip.jpg",
     desc: "Golden brown-butter dough crowded with creamy white chocolate chips. Jeanie's own order, every time.",
     prices: [["6 Pack", 1500], ["12 Pack", 2600], ["24 Party Box", 3900]] },
-  { name: "PB Wish Sandwiches", img: "pb-sandwich.jpg",
+  { name: "PB Wish Sandwiches", img: "extra-pb-held.jpg",
     desc: "Two soft peanut butter cookies pressed around a whipped PB filling. Contains peanuts.",
     prices: [["6 Pack", 1500], ["12 Pack", 2600], ["24 Party Box", 3900]] },
   { name: "Baker's Variety Wish", img: "real-lineup.jpg",
