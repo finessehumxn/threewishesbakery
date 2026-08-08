@@ -77,13 +77,6 @@ const PRODUCTS = {
       { label: "36-count party box", price: 78, stripeLink: "" },
     ],
   },
-  lemonloaf: {
-    name: "Golden Lemon Bliss Loaf",
-    sizes: [
-      { label: "Half loaf", price: 14, stripeLink: "" },
-      { label: "Full loaf", price: 24, stripeLink: "" },
-    ],
-  },
   tangybars: {
     name: "The Citrus Spell",
     sizes: [

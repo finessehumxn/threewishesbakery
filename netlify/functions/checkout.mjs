@@ -25,7 +25,6 @@ const CATALOG = {
   variety: { name: "Baker's Variety Wish", sizes: { "6": 1500, "12": 2600, "24 Party Box": 3900 } },
   doughsleeve: { name: "Take-&-Bake Cookie Dough", sizes: { "12 dough pucks": 2200, "24 dough pucks": 4000 } },
   brownies: { name: "The Fudgy Fortune Brownie", sizes: { "6 brownies": 1800, "12 brownies": 3200, "36-count party box": 7800 } },
-  lemonloaf: { name: "Golden Lemon Bliss Loaf", sizes: { "Half loaf": 1400, "Full loaf": 2400 } },
   tangybars: { name: "The Citrus Spell", sizes: { "6": 1800, "12": 3200 } },
   sourclassic: { name: "Classic Sourdough Loaf", sizes: { "Half loaf": 700, "Full loaf": 1200 } },
   sourbacon: { name: "Bacon & Cheddar Sourdough", sizes: { "Half loaf": 900, "Full loaf": 1600 } },
